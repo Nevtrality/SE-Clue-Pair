@@ -1,0 +1,12 @@
+Room, Waiting Room, W
+Room, House Office, O
+Room, Breakroom, B
+Room, MRI Room, M
+Room, Surgery Room, S
+Room, Clinic, C
+Room, Psych Ward, P
+Room, Day Care, D
+Room, Morgue, G
+
+Space, Unused, X
+Space, Hallway, H
