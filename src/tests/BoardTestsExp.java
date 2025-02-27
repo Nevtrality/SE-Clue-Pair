@@ -15,7 +15,7 @@ public class BoardTestsExp {
     // Test creation of adjacency lists for 4x4 board
     @Test
     public void testTopLeft(){
-
+        
     }
 
     @Test
