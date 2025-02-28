@@ -1,3 +1,6 @@
+//Authors: Chloe Millham, James Towle, written 2/27/2025
+//This class contains an assortment of tests, five of which test the calcTargets() function and the
+//rest of which test the board's creation and functionality with edge cases and other conflicting events
 package tests;
 import Experiment.TestBoard;
 import static org.junit.Assert.assertEquals;
@@ -70,6 +73,7 @@ public class BoardTestsExp {
         TestBoardCell cell = board.getCell(0,0);
         board.calcTargets(cell, 3);
         Set<TestBoardCell> targets = board.getTargets();
+        System.out.println(targets.size());
         assertEquals(6, targets.size());
         assertTrue(targets.contains(board.getCell(3,0)));
         assertTrue(targets.contains(board.getCell(2,1)));
@@ -100,6 +104,33 @@ public class BoardTestsExp {
         assertEquals(2, targets.size());
         assertTrue(targets.contains(board.getCell(2,1)));
         assertTrue(targets.contains(board.getCell(1,2)));
+    }
+
+    @Test
+    public void maxDieRoll(){
+        board.getCell(0,0).setRoom(true);
+        TestBoardCell cell = board.getCell(0, 0);
+        board.calcTargets(cell, 6);
+        Set<TestBoardCell> targets = board.getTargets();
+        assertEquals(7, targets.size());
+        assertTrue(targets.contains(board.getCell(1, 1)));
+        assertTrue(targets.contains(board.getCell(2, 2)));
+        assertTrue(targets.contains(board.getCell(3, 3)));
+        assertTrue(targets.contains(board.getCell(1, 3)));
+        assertTrue(targets.contains(board.getCell(3, 1)));
+        assertTrue(targets.contains(board.getCell(2, 0)));
+        assertTrue(targets.contains(board.getCell(0, 2)));
+    }
+
+    @Test
+    public void roomAndOccCell(){
+        board.getCell(1,0).setRoom(true);
+        board.getCell(0,1).setOccupied(true);
+        TestBoardCell cell = board.getCell(0,0);
+        board.calcTargets(cell, 2);
+        Set<TestBoardCell> targets = board.getTargets();
+        assertEquals(1, targets.size());
+        assertTrue(targets.contains(board.getCell(1,0)));
     }
 
 }

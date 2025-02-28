@@ -1,3 +1,7 @@
+//Authors: Chloe Millham, James Towle, written 2/27/2025
+//This class creates TestBoardCell, which initializes the variables row, column, room, and occupied,
+//all of which are essential elements for generating the playing board. The class also creates a list
+//of adjacent cells and has setters for the properties isRoom and isOccupied()
 package Experiment;
 import java.util.Set;
 import java.util.HashSet;
