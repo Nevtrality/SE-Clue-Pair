@@ -33,16 +33,24 @@ public class TestBoard {
     private void verifier(TestBoardCell startCell, int pathlength, int rowChange, int colChange){
         int row = startCell.row;
         int column = startCell.column;
+        
         // append if pathlength = 0 && not already in set, break
         if(pathlength == 0){
-            if(!targetList.contains(board.getCell(row, column))){
-                targetList.add(startCell);
+            if(testboard[column][row] == null){
+            	testboard[column][row] = new TestBoardCell(row,column);
+                targetList.add(testboard[column][row]);
                 return;
             }
         }
-
+        
+        
         // make sure stays in bounds of row
         if((row+rowChange)<MAX_ROW_RANGE && (row+rowChange)>=0){
+        	if(testboard[column][row+rowChange] == null) {
+        		// verifier( cell + rowChange, pathlength-1)
+        		verifier(new TestBoardCell(row+rowChange, column), pathlength-1, rowChange, colChange);
+        		return;
+        	}
             // break if next row index is player
             if(testboard[column][row+rowChange].getOccupied()){
                 return;
@@ -51,13 +59,16 @@ public class TestBoard {
             if(testboard[column][row+rowChange].isRoom()){
                 targetList.add(testboard[column][row+rowChange]);
                 return;
-            }
-            // verifier( cell + rowChange, pathlength-1)
-            board.verifier(new TestBoardCell(row+rowChange, column), pathlength-1, rowChange, colChange);
+            }            
         }
 
         // make sure stays in bounds of column
         if((column+colChange)<MAX_COL_RANGE && (column+colChange)>=0){
+        	if(testboard[column+colChange][row] == null) {
+        		// verifier( cell + rowChange, pathlength-1)
+        		verifier(new TestBoardCell(row, column+colChange), pathlength-1, rowChange, colChange);
+        		return;
+        	}
             // break if next column index is player
             if(testboard[column+colChange][row].getOccupied()){
                 return;
@@ -67,14 +78,15 @@ public class TestBoard {
                 targetList.add(testboard[column][row+rowChange]);
                 return;
             }
-            // verifier( cell + colChange, pathlength-1)
-            board.verifier(new TestBoardCell(row, column+colChange), pathlength-1, rowChange, colChange);
         }
     }
 
     public TestBoardCell getCell(int row, int col){
-        // return cell at specified position
-        testboard[col][row] = new TestBoardCell(row,col);
+        // make sure not overriding existing cell
+    	if(testboard[col][row] == null) {
+    		testboard[col][row] = new TestBoardCell(row,col);
+    	}
+    	// return cell at specified position
         return testboard[col][row];
     }
 
