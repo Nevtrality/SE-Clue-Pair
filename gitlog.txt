@@ -1,0 +1,26 @@
+I, James Towle, certify that I participated equitably in the creation of assignment C13A-2, dated 2/27/25.
+I, Chloe Millham, certify that I participated equitably in the creation of assignment C13A-2, dated 2/27/25.
+
+commit e3882eb1fbb2aa73e44f101c092080ddb67e3930
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Thu Feb 27 19:10:10 2025 -0700
+
+    added 2 more tests and made sure tests failed, and added comments
+
+commit a15524e91ac984d11f2251b314156b26f1008767
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Thu Feb 27 18:26:57 2025 -0700
+
+    wrote board tests and fixed errors
+
+commit 599437f8af827c5e00810e707d15c767d3d6f953
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Wed Feb 26 22:10:49 2025 -0700
+
+    adjusted stuff for test cases
+
+commit 6b9ea53aa2218c4e8331c2d08b85bad570fe0da1
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Wed Feb 26 21:43:29 2025 -0700
+
+    created classes and filled draft for Experiments package
