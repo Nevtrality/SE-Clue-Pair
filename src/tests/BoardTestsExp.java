@@ -44,7 +44,8 @@ public class BoardTestsExp {
         Set<TestBoardCell> testList = cell.getAdjList();
         assertTrue(testList.contains(board.getCell(0, 3)));
         assertTrue(testList.contains(board.getCell(1, 2)));
-        assertEquals(2,testList.size());
+        assertTrue(testList.contains(board.getCell(2, 3)));
+        assertEquals(3,testList.size());
     }
     
     @Test
@@ -97,13 +98,14 @@ public class BoardTestsExp {
 
     @Test
     public void testRoom(){
-        board.getCell(2,2).setRoom(true);
-        TestBoardCell cell = board.getCell(1, 1);
+        board.getCell(1,1).setRoom(true);
+        TestBoardCell cell = board.getCell(0, 0);
         board.calcTargets(cell, 2);
         Set<TestBoardCell> targets = board.getTargets();
-        assertEquals(2, targets.size());
-        assertTrue(targets.contains(board.getCell(2,1)));
-        assertTrue(targets.contains(board.getCell(1,2)));
+        assertEquals(3, targets.size());
+        assertTrue(targets.contains(board.getCell(2,0)));
+        assertTrue(targets.contains(board.getCell(0,2)));
+        assertTrue(targets.contains(board.getCell(1, 1)));
     }
 
     @Test

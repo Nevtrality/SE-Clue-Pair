@@ -20,96 +20,70 @@ public class TestBoard {
     private static int MAX_COL_RANGE = 4;
 
     public TestBoard(){
-        // set up 2d array of 
-        testboard = new TestBoardCell[MAX_COL_RANGE][MAX_ROW_RANGE];
+        // set up 2d array of cells
+        testboard = new TestBoardCell[MAX_ROW_RANGE][MAX_COL_RANGE];
+        for (int i = 0; i<MAX_ROW_RANGE; i++){
+            for (int j = 0; j<MAX_COL_RANGE; j++){
+                testboard[i][j] =  new TestBoardCell(i,j);
+            }
+        }
+        // create full adjacency lists
+        createAdjList();
     }
 
     public void calcTargets(TestBoardCell startCell, int pathlength){
         // reset targetList
         targetList = new HashSet<TestBoardCell>();
         visited = new HashSet<TestBoardCell>();
-        // Top Right
-        verifier(startCell, pathlength, 1, 1);
+        // add start cell
+        visited.add(startCell);
+        verifier(startCell, pathlength);
+        if(targetList.size()==0){targetList.add(startCell);} // base case for no valid moves
     }
 
-    private void verifier(TestBoardCell startCell, int pathlength, int rowChange, int colChange){
-    	
-        int row = startCell.row;
-        int column = startCell.column;
-        
-        // append if pathlength = 0 && not already in set, break
-        if(pathlength == 0){
-            if(testboard[column][row] == null){
-            	testboard[column][row] = new TestBoardCell(row,column);
-                //targetList.add(testboard[column][row]);
-                return;
+    private void verifier(TestBoardCell startCell, int pathlength){
+    	// go through cells in adjacency list
+        for (TestBoardCell cell : startCell.getAdjList()){
+            // if visited or occupied, skip over
+            if (visited.contains(cell) || cell.getOccupied()){
+            }else{
+                // if the path ends here or cell is a room, end
+                if(pathlength==1 || cell.isRoom()){
+                    targetList.add(cell);
+                } else{
+                    // otherwise add the cell
+                    visited.add(cell);
+                    verifier(cell, pathlength-1);
+                    visited.remove(cell);
+                }
             }
         }
-        
-        testboard[column][row] = new TestBoardCell(row,column);
-        // make sure stays in bounds of row +change
-        if((row+rowChange)<MAX_ROW_RANGE && (row+rowChange)>=0){
-        	if(testboard[column][row+rowChange] == null) {
-        		// verifier( cell + rowChange, pathlength-1)
-        		verifier(new TestBoardCell(row+rowChange, column), pathlength-1, rowChange, colChange);
-        	} else if(testboard[column][row+rowChange].getOccupied()) {
-        		// break if next row index is player
-            } else if(testboard[column][row+rowChange].isRoom()) {
-            	// if next row index is room, append next row index, break
-                //targetList.add(testboard[column][row+rowChange]);
-            }            
-        }
-        
-        
-        
-     // make sure stays in bounds of row -change
-        if((row-rowChange)<MAX_ROW_RANGE && (row-rowChange)>=0){
-        	if(testboard[column][row-rowChange] == null) {
-        		// verifier( cell + rowChange, pathlength-1)
-        		verifier(new TestBoardCell(row-rowChange, column), pathlength-1, rowChange, colChange);
-        	} else if(testboard[column][row-rowChange].getOccupied()) {
-        		// break if next row index is player
-            } else if(testboard[column][row-rowChange].isRoom()) {
-            	// if next row index is room, append next row index, break
-                //targetList.add(testboard[column][row+rowChange]);
-            }            
-        }
-        
+    }
 
-        // make sure stays in bounds of column +change
-        if((column+colChange)<MAX_COL_RANGE && (column+colChange)>=0){
-        	if(testboard[column+colChange][row] == null) {
-        		// verifier( cell + rowChange, pathlength-1)
-        		verifier(new TestBoardCell(row, column+colChange), pathlength-1, rowChange, colChange);
-        	} else if(testboard[column+colChange][row].getOccupied()){
-        		// break if next column index is player
-            } else if(testboard[column+colChange][row].isRoom()){
-            	// if next column index is room, append next column index, break
-                //targetList.add(testboard[column+colChange][row]);
-            }
-        }
-        
-     // make sure stays in bounds of column -change
-        if((column-colChange)<MAX_COL_RANGE && (column-colChange)>=0){
-        	if(testboard[column-colChange][row] == null) {
-        		// verifier( cell + rowChange, pathlength-1)
-        		verifier(new TestBoardCell(row, column-colChange), pathlength-1, rowChange, colChange);
-        	} else if(testboard[column-colChange][row].getOccupied()){
-        		// break if next column index is player
-            } else if(testboard[column-colChange][row].isRoom()){
-            	// if next column index is room, append next column index, break
-                //targetList.add(testboard[column-colChange][row]);
+
+    // make adjacency list for the board of cells
+    private void createAdjList(){
+        for (int i = 0; i<MAX_ROW_RANGE; i++){
+            for (int j = 0; j<MAX_COL_RANGE; j++){
+                if(j>0){
+                    testboard[i][j].addAdjacency(getCell(i,j-1));
+                }
+                if(i>0){
+                    testboard[i][j].addAdjacency(getCell(i-1,j));
+                }
+                if(i<MAX_ROW_RANGE-1){
+                    testboard[i][j].addAdjacency(getCell(i+1,j));
+                }
+                if(j<MAX_COL_RANGE-1){
+                    testboard[i][j].addAdjacency(getCell(i,j+1));
+                }
             }
         }
     }
 
     public TestBoardCell getCell(int row, int col){
-        // make sure not overriding existing cell
-    	if(testboard[col][row] == null) {
-    		testboard[col][row] = new TestBoardCell(row,col);
-    	}
     	// return cell at specified position
-        return testboard[col][row];
+        return testboard[row][col];
     }
 
     public Set<TestBoardCell> getTargets(){
