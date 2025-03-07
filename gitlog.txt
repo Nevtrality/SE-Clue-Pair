@@ -1,5 +1,17 @@
-I, James Towle, certify that I participated equitably in the creation of assignment C13A-2, dated 2/27/25.
-I, Chloe Millham, certify that I participated equitably in the creation of assignment C13A-2, dated 2/27/25.
+I, James Towle, certify that I participated equitably in the creation of assignment C14A-1, dated 03/04/25.
+I, Chloe Millham, certify that I participated equitably in the creation of assignment C14A-1, dated 03/04/25.
+
+commit c274b6b2cde42fc1c92734ff9e29a82e0762574b
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Mar 4 22:58:59 2025 -0700
+
+    modified code to pass tests
+
+commit 985ffe812939f9a6b8c330cc61b052cb746ef46f
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Mar 4 16:38:13 2025 -0700
+
+    setting up github repository
 
 commit e3882eb1fbb2aa73e44f101c092080ddb67e3930
 Author: Nevtrality <james_towle@outlook.com>

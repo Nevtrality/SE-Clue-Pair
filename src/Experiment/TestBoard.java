@@ -11,9 +11,9 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class TestBoard {
-    private Set<TestBoardCell> targetList;
-    private Set<TestBoardCell> visited;
-    private TestBoardCell[][] testboard;
+    private Set<BoardCell> targetList;
+    private Set<BoardCell> visited;
+    private BoardCell[][] testboard;
 
     // Max range for calcTargets range
     private static int MAX_ROW_RANGE = 4;
@@ -21,29 +21,29 @@ public class TestBoard {
 
     public TestBoard(){
         // set up 2d array of cells
-        testboard = new TestBoardCell[MAX_ROW_RANGE][MAX_COL_RANGE];
+        testboard = new BoardCell[MAX_ROW_RANGE][MAX_COL_RANGE];
         for (int i = 0; i<MAX_ROW_RANGE; i++){
             for (int j = 0; j<MAX_COL_RANGE; j++){
-                testboard[i][j] =  new TestBoardCell(i,j);
+                testboard[i][j] =  new BoardCell(i,j);
             }
         }
         // create full adjacency lists
         createAdjList();
     }
 
-    public void calcTargets(TestBoardCell startCell, int pathlength){
+    public void calcTargets(BoardCell startCell, int pathlength){
         // reset targetList
-        targetList = new HashSet<TestBoardCell>();
-        visited = new HashSet<TestBoardCell>();
+        targetList = new HashSet<BoardCell>();
+        visited = new HashSet<BoardCell>();
         // add start cell
         visited.add(startCell);
         verifier(startCell, pathlength);
         if(targetList.size()==0){targetList.add(startCell);} // base case for no valid moves
     }
 
-    private void verifier(TestBoardCell startCell, int pathlength){
+    private void verifier(BoardCell startCell, int pathlength){
     	// go through cells in adjacency list
-        for (TestBoardCell cell : startCell.getAdjList()){
+        for (BoardCell cell : startCell.getAdjList()){
             // if visited or occupied, skip over
             if (visited.contains(cell) || cell.getOccupied()){
             }else{
@@ -81,12 +81,12 @@ public class TestBoard {
         }
     }
 
-    public TestBoardCell getCell(int row, int col){
+    public BoardCell getCell(int row, int col){
     	// return cell at specified position
         return testboard[row][col];
     }
 
-    public Set<TestBoardCell> getTargets(){
+    public Set<BoardCell> getTargets(){
         // return set/list created by calcTargets
         return targetList;
     }
