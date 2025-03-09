@@ -2,7 +2,11 @@ package clueGame;
 
 import java.util.HashSet;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Set;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Board {
 	private Set<BoardCell> targetList;
@@ -11,12 +15,14 @@ public class Board {
     int numRows;
     int numColumns;
     String layoutConfigFile;
-    Map<Character, Room> roomMap;
+    String setupConfigFile;
+    Map<String, String> roomMap; // stores room name and character
+    Map<String, String> cellTypeMap; // stores cell type and character
 
 
     // Max range for calcTargets range
-    private static int MAX_ROW_RANGE = 30;
-    private static int MAX_COL_RANGE = 28;
+    private static int MAX_ROW_RANGE;
+    private static int MAX_COL_RANGE;
     
     // variable and methods used for singleton pattern
     private static Board theInstance = new Board();
@@ -39,19 +45,93 @@ public class Board {
     }
     //Initiates board
     public void initialize() {
-    	
+    	loadSetupConfig();
+    	loadLayoutConfig();
     }
 
     public void setConfigFiles(String csvFile, String dataFile) {
-
+    	this.layoutConfigFile = csvFile;
+    	this.setupConfigFile = dataFile;
     }
 
     public void loadSetupConfig() {
-
+    	roomMap = new HashMap<String, String>();
+    	cellTypeMap = new HashMap<String, String>();
+    	
+    	// open data file and put data in hashmap
+    	try {
+	    	File file = new File(setupConfigFile);
+	    	Scanner reader = new Scanner(file);
+	    	while(reader.hasNextLine()) {
+	    		String data = reader.nextLine();
+	    		String[] dataArray = data.split(",");
+	    		roomMap.put(dataArray[2], dataArray[1]);
+	    		cellTypeMap.put(dataArray[0], dataArray[2]);
+	    	}
+	    	reader.close();
+    	} catch (FileNotFoundException e) {
+    		System.out.println("Error occurred when reading setup file");
+    		e.printStackTrace();
+    	}
     }
 
     public void loadLayoutConfig() {
-
+    	// get board size
+    	int rowCount = 0;
+		int columnCount = 0;
+    	try {
+    		File file = new File(layoutConfigFile);
+    		Scanner reader = new Scanner(file);
+    		while(reader.hasNextLine()) {
+    			String data = reader.nextLine();
+    			String[] dataArray = data.split(",");
+    			columnCount = 0;
+    			for(String cell : dataArray) {
+    				columnCount++;
+    			}
+    			rowCount++;
+    		}
+    		reader.close();
+    	} catch (FileNotFoundException e) {
+    		System.out.println("Error occurred when reading layout file");
+    		e.printStackTrace();
+    	}
+    	
+    	MAX_ROW_RANGE = rowCount;
+    	MAX_COL_RANGE = columnCount;
+    	
+    	// fill board from file
+    	grid = new BoardCell[rowCount][columnCount];
+    	try {
+    		// open file and reader
+    		File file = new File(layoutConfigFile);
+    		Scanner reader = new Scanner(file);
+    		rowCount = 0;
+    		// loop through file's lines
+    		while(reader.hasNextLine()) {
+    			String data = reader.nextLine();
+    			String[] dataArray = data.split(",");
+    			columnCount = 0;
+    			// loop through each string in line separated by comma
+    			for(String string : dataArray) {
+    				grid[rowCount][columnCount] = new BoardCell(rowCount,columnCount);
+    				BoardCell cell = grid[rowCount][columnCount];
+    				// set cell's name and type
+    				if (string.length()>1) {
+    					cell.setName(string.charAt(0));
+    					cell.setType(string.charAt(1));
+    				} else {
+    					cell.setName(string.charAt(0));
+    				}
+    				columnCount++;
+    			}
+    			rowCount++;
+    		}
+    		reader.close();
+    	} catch (FileNotFoundException e) {
+    		System.out.println("Error occurred when reading layout file");
+    		e.printStackTrace();
+    	}
     }
 
     public int getNumRows() {

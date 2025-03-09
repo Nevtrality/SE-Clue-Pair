@@ -31,6 +31,10 @@ public class BoardCell {
     public Set<BoardCell> getAdjList(){
         return adjList;
     }
+    
+    public void setType(char type) {
+    	
+    }
 
     public void setRoom(boolean room){
         this.isRoom = true;
@@ -38,6 +42,10 @@ public class BoardCell {
 
     public boolean isRoom(){
         return isRoom;
+    }
+    
+    public void setName(char name) {
+    	initial = name;
     }
 
     public char getName() {
