@@ -49,8 +49,8 @@ public class Board {
     }
 
     public void setConfigFiles(String csvFile, String dataFile) {
-    	this.layoutConfigFile = "src/data/"+csvFile;
-    	this.setupConfigFile = "src/data/"+dataFile;
+    	this.layoutConfigFile = "data/"+csvFile;
+    	this.setupConfigFile = "data/"+dataFile;
     }
 
     public void loadSetupConfig() {
