@@ -60,9 +60,13 @@ public class Board {
     	try {
 	    	File file = new File(setupConfigFile);
 	    	Scanner reader = new Scanner(file);
+	    	// loop through each row
 	    	while(reader.hasNextLine()) {
+	    		// grab next line
 	    		String data = reader.nextLine();
+	    		// ignore commented parts of file
 	    		if(!(data.charAt(0) == '/')) {
+	    			// split line into usable strings
 		    		String[] dataArray = data.split(", ");
 		    		roomMap.put(dataArray[2].charAt(0), new Room());
 		    		roomMap.get(dataArray[2].charAt(0)).setName(dataArray[1]); // set room name
@@ -82,10 +86,12 @@ public class Board {
     	try {
     		File file = new File(layoutConfigFile);
     		Scanner reader = new Scanner(file);
+    		// loop through each line of board
     		while(reader.hasNextLine()) {
     			String data = reader.nextLine();
     			String[] dataArray = data.split(",");
     			columnCount = 0;
+    			// loop through each column of board
     			for(String cell : dataArray) {
     				columnCount++;
     			}
@@ -118,7 +124,7 @@ public class Board {
     				BoardCell cell = grid[rowCount][columnCount];
     				// set cell's name and type
     				cell.setRoom(roomMap.get(string.charAt(0)));
-    				if (string.length()>1) {
+    				if (string.length()==2 && !(string.charAt(1)==' ')) {
     					cell.setName(string.charAt(0));
     					cell.setType(string.charAt(1));
     				} else {
