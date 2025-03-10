@@ -44,8 +44,12 @@ public class Board {
     }
     //Initiates board
     public void initialize() {
-    	loadSetupConfig();
-    	loadLayoutConfig();
+    	try {
+    		loadSetupConfig();
+			loadLayoutConfig();
+		} catch (BadConfigFormatException e) {
+			e.printStackTrace();
+		}
     }
 
     public void setConfigFiles(String csvFile, String dataFile) {
@@ -53,7 +57,7 @@ public class Board {
     	this.setupConfigFile = "data/"+dataFile;
     }
 
-    public void loadSetupConfig() {
+    public void loadSetupConfig() throws BadConfigFormatException{
     	roomMap = new HashMap<Character, Room>();
     	
     	// open data file and put data in hashmap
@@ -68,6 +72,10 @@ public class Board {
 	    		if(!(data.charAt(0) == '/')) {
 	    			// split line into usable strings
 		    		String[] dataArray = data.split(", ");
+		    		System.out.println(dataArray[0]);
+		    		if(!dataArray[0].equals( "Room" ) && !dataArray[0].equals( "Space")) {
+		    			throw new BadConfigFormatException("Area must be a room or a space");
+		    		}
 		    		roomMap.put(dataArray[2].charAt(0), new Room());
 		    		roomMap.get(dataArray[2].charAt(0)).setName(dataArray[1]); // set room name
 	    		}
@@ -79,7 +87,7 @@ public class Board {
     	}
     }
 
-    public void loadLayoutConfig() {
+    public void loadLayoutConfig() throws  BadConfigFormatException{
     	// get board size
     	int rowCount = 0;
 		int columnCount = 0;
@@ -97,6 +105,7 @@ public class Board {
     			}
     			rowCount++;
     		}
+
     		reader.close();
     	} catch (FileNotFoundException e) {
     		System.out.println("Error occurred when reading layout file");
@@ -122,6 +131,10 @@ public class Board {
     			for(String string : dataArray) {
     				grid[rowCount][columnCount] = new BoardCell(rowCount,columnCount);
     				BoardCell cell = grid[rowCount][columnCount];
+    				//Check if room exists
+    				if(roomMap.get(string.charAt(0)) == null) {
+    					throw new BadConfigFormatException("Room is not in setup file");
+    				}
     				// set cell's name and type
     				cell.setRoom(roomMap.get(string.charAt(0)));
     				if (string.length()==2 && !(string.charAt(1)==' ')) {
@@ -132,9 +145,15 @@ public class Board {
     				}
     				columnCount++;
     			}
+  
+        		if(columnCount != MAX_COL_RANGE) {
+            		throw new BadConfigFormatException("Does not have the same number of columns in every row");
+            	}
+
     			rowCount++;
     		}
     		reader.close();
+
     	} catch (FileNotFoundException e) {
     		System.out.println("Error occurred when reading layout file");
     		e.printStackTrace();
