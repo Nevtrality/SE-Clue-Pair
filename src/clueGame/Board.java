@@ -16,8 +16,7 @@ public class Board {
     int numColumns;
     String layoutConfigFile;
     String setupConfigFile;
-    Map<String, String> roomMap; // stores room name and character
-    Map<String, String> cellTypeMap; // stores cell type and character
+    Map<Character, Room> roomMap; // stores room name and character
 
 
     // Max range for calcTargets range
@@ -30,14 +29,14 @@ public class Board {
     private Board() {
     	super();
     	// set up 2d array of cells
-      grid = new BoardCell[MAX_ROW_RANGE][MAX_COL_RANGE];
-      for (int i = 0; i<MAX_ROW_RANGE; i++){
-          for (int j = 0; j<MAX_COL_RANGE; j++){
-              grid[i][j] =  new BoardCell(i,j);
-          }
-      }
-      // create full adjacency lists
-      createAdjList();
+//      grid = new BoardCell[MAX_ROW_RANGE][MAX_COL_RANGE];
+//      for (int i = 0; i<MAX_ROW_RANGE; i++){
+//          for (int j = 0; j<MAX_COL_RANGE; j++){
+//              grid[i][j] =  new BoardCell(i,j);
+//          }
+//      }
+//      // create full adjacency lists
+//      createAdjList();
     }
     // method returns only board
     public static Board getInstance() {
@@ -50,13 +49,12 @@ public class Board {
     }
 
     public void setConfigFiles(String csvFile, String dataFile) {
-    	this.layoutConfigFile = csvFile;
-    	this.setupConfigFile = dataFile;
+    	this.layoutConfigFile = "src/data/"+csvFile;
+    	this.setupConfigFile = "src/data/"+dataFile;
     }
 
     public void loadSetupConfig() {
-    	roomMap = new HashMap<String, String>();
-    	cellTypeMap = new HashMap<String, String>();
+    	roomMap = new HashMap<Character, Room>();
     	
     	// open data file and put data in hashmap
     	try {
@@ -64,9 +62,11 @@ public class Board {
 	    	Scanner reader = new Scanner(file);
 	    	while(reader.hasNextLine()) {
 	    		String data = reader.nextLine();
-	    		String[] dataArray = data.split(",");
-	    		roomMap.put(dataArray[2], dataArray[1]);
-	    		cellTypeMap.put(dataArray[0], dataArray[2]);
+	    		if(!(data.charAt(0) == '/')) {
+		    		String[] dataArray = data.split(", ");
+		    		roomMap.put(dataArray[2].charAt(0), new Room());
+		    		roomMap.get(dataArray[2].charAt(0)).setName(dataArray[1]); // set room name
+	    		}
 	    	}
 	    	reader.close();
     	} catch (FileNotFoundException e) {
@@ -117,6 +117,7 @@ public class Board {
     				grid[rowCount][columnCount] = new BoardCell(rowCount,columnCount);
     				BoardCell cell = grid[rowCount][columnCount];
     				// set cell's name and type
+    				cell.setRoom(roomMap.get(string.charAt(0)));
     				if (string.length()>1) {
     					cell.setName(string.charAt(0));
     					cell.setType(string.charAt(1));
@@ -135,19 +136,19 @@ public class Board {
     }
 
     public int getNumRows() {
-        return numRows;
+        return MAX_ROW_RANGE;
     }
 
     public int getNumColumns() {
-        return numColumns;
+        return MAX_COL_RANGE;
     }
 
     public Room getRoom(char letter) {
-        return new Room();
+        return roomMap.get(letter);
     }
 
     public Room getRoom(BoardCell cell) {
-        return new Room();
+        return cell.getRoom();
     }
 
 

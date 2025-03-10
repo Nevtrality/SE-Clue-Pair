@@ -1,3 +1,4 @@
+// Rooms and room cards
 Room, Waiting Room, W
 Room, House Office, O
 Room, Breakroom, B
@@ -7,6 +8,6 @@ Room, Clinic, C
 Room, Psych Ward, P
 Room, Day Care, D
 Room, Morgue, G
-
+// other spaces on board
 Space, Unused, X
 Space, Hallway, H
