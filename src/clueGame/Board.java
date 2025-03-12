@@ -238,6 +238,10 @@ public class Board {
             }
         }
     }
+    
+    public Set<BoardCell> getAdjList(int row, int col){
+    	return new HashSet<BoardCell>();
+    }
 
     public BoardCell getCell(int row, int col){
     	// return cell at specified position
