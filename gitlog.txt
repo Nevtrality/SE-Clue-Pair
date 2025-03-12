@@ -1,5 +1,56 @@
-I, James Towle, certify that I participated equitably in the creation of assignment C14A-2, dated 3/7/2025.
-I, Chloe Millham, certify that I participated equitably in the creation of assignment C14A-2, dated 3/7/2025.
+commit fc216c354434eb925bb50b55f01600631ef2b5a5
+Author: cMillham <chloemillham@gmail.com>
+Date:   Mon Mar 10 16:16:28 2025 -0600
+
+    Exception tests all pass
+
+commit 6d62a51cd82da89cf69985de706532d738f01c21
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Mon Mar 10 13:44:01 2025 -0600
+
+    Fixed files to make sure tests pass for FileInitTests306
+
+commit 3e545fb637d62719f23a49a2151d20d9fa3edb12
+Author: cMillham <chloemillham@gmail.com>
+Date:   Sun Mar 9 23:39:45 2025 -0600
+
+    updated custom exception and added exception tests
+
+commit 80d357546aaca3f82d17031e4d7fcd3023f4a921
+Author: cMillham <chloemillham@gmail.com>
+Date:   Sun Mar 9 23:32:14 2025 -0600
+
+    Changed board to use new correct file location for data
+
+commit 94aee3e89d0f41363db38fe89522ad8e1bc21685
+Author: cMillham <chloemillham@gmail.com>
+Date:   Sun Mar 9 23:27:08 2025 -0600
+
+    Moved data folder to be at the same level as src
+
+commit b57702943c891964966a5e7e1d058bdc120b5eb6
+Author: cMillham <chloemillham@gmail.com>
+Date:   Sun Mar 9 23:20:15 2025 -0600
+
+    Moved ExceptionTests306 to the correct location
+
+commit e4efdc098cf3fa6e78f6ed6389e15faaf64bb438
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sun Mar 9 20:45:57 2025 -0600
+
+    adjusted files to pass all FileInitTests tests
+
+commit 87c0f19d3fc1279fe9f61142b9861fa280085314
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sun Mar 9 01:07:48 2025 -0700
+
+    drafted file reading for setup and layout of the clue boards
+
+commit 7cf55320c4fd79a4595bc3c3c871b52c1295509e
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sat Mar 8 22:04:54 2025 -0700
+
+    push to public repo
 
 commit 51ed55a33abe354fded03b47293381b166e7fadc
 Author: Nevtrality <james_towle@outlook.com>
