@@ -240,7 +240,7 @@ public class Board {
     }
     
     public Set<BoardCell> getAdjList(int row, int col){
-    	return new HashSet<BoardCell>();
+    	return grid[row][col].getAdjList();
     }
 
     public BoardCell getCell(int row, int col){
