@@ -88,7 +88,7 @@ public class BoardAdjTargetTest {
 		// Test walkway imbedded in room and next to unused space ie [27,6]
 		Set<BoardCell> testList = board.getAdjList(27,6);
 		assertEquals(1, testList.size());
-		assertTrue(testList.contains(board.getCell(27, 7)));
+		assertTrue(testList.contains(board.getCell(27,7)));
 		
 		// Test walkway on edge of board ie [18,27]
 		testList = board.getAdjList(18,27);

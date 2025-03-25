@@ -8,7 +8,7 @@ public class BoardCell {
     private int row, col;
     private char initial, secretPassage;
     private DoorDirection doorDirection;
-    private boolean roomLabel, isRoom, isDoorway, roomCenter, occupied;
+    private boolean roomLabel, isRoom, isDoorway, roomCenter, occupied, unused;
     private Room room;
 
     // List of adjacent cells
@@ -27,10 +27,42 @@ public class BoardCell {
         roomLabel = false;
         isDoorway = false;
         roomCenter = false;
+        unused = false;
     }
 
-    public  void addAdj( BoardCell cell ){
-    	adjList.add(cell);
+    public  void addAdj( BoardCell cell , Board board){
+    	// make sure only valid cells are in adjacency list
+    	if(!cell.isRoom() && !cell.getUnused()) {
+    		// check to make sure the intended cell is not a room cell or an unused cell
+    		adjList.add(cell);
+    	} else if (isDoorway == true && cell.isRoom()) {
+    		// if the intended cell is a room cell, grab the room's center cell and add it to list
+    		if(!adjList.contains(cell.getRoom().getCenterCell())) {
+    			if(cell.getRoom().getCenterCell()==null) {
+    				System.out.println("true");
+    				System.out.println(cell.getName());
+    				System.out.println(cell.isRoom());
+    			}
+    			adjList.add(cell.getRoom().getCenterCell());
+    		}
+    	} else if (roomCenter == true) {
+    		// check if current room is a room center
+    		// grab any doorways to the room
+    		Set<BoardCell> doorways = room.getDoorways();
+    		for(BoardCell door: doorways) {
+    			if(!adjList.contains(door)) {
+    				adjList.add(door);
+    			}
+    		}
+    		if(room.getSecretPassage() != null) {
+    		// check if room has a secret passage
+    			// if so, add passage to list
+    			char passage = room.getSecretPassage().getSecretPassage();
+    			if (!adjList.contains(board.getRoom(passage).getCenterCell())){
+    				adjList.add(board.getRoom(passage).getCenterCell());
+    			}
+    		}
+    	}
     }
 
     public Set<BoardCell> getAdjList(){
@@ -134,5 +166,13 @@ public class BoardCell {
     
     public Room getRoom() {
     	return room;
+    }
+    
+    public void setUnused(boolean unused) {
+    	this.unused = unused;
+    }
+    
+    public boolean getUnused() {
+    	return unused;
     }
 }

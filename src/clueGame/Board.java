@@ -47,6 +47,7 @@ public class Board {
     	try {
     		loadSetupConfig();
 			loadLayoutConfig();
+			theInstance.createAdjList();
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();
 		}
@@ -72,7 +73,7 @@ public class Board {
 	    		if(!(data.charAt(0) == '/')) {
 	    			// split line into usable strings
 		    		String[] dataArray = data.split(", ");
-		    		System.out.println(dataArray[0]);
+		    		//System.out.println(dataArray[0]);
 		    		if(!dataArray[0].equals( "Room" ) && !dataArray[0].equals( "Space")) {
 		    			throw new BadConfigFormatException("Area must be a room or a space");
 		    		}
@@ -140,8 +141,15 @@ public class Board {
     				if (string.length()==2 && !(string.charAt(1)==' ')) {
     					cell.setName(string.charAt(0));
     					cell.setType(string.charAt(1));
+					// 
+    				} else if((string.charAt(0)=='W')) {
+    					cell.setName(string.charAt(0));
+    				} else if((string.charAt(0)=='X')){
+    					cell.setName(string.charAt(0));
+    					cell.setUnused(true); 
     				} else {
     					cell.setName(string.charAt(0));
+    					cell.setRoom(true);
     				}
     				columnCount++;
     			}
@@ -151,6 +159,29 @@ public class Board {
             	}
 
     			rowCount++;
+    		}
+			// loops through board to add all doorways that lead to a particular room to the corresponding room's list
+    		for(int i = 0; i < MAX_ROW_RANGE; i++) {
+    			for(int j = 0; j < MAX_COL_RANGE; j++) {
+    				BoardCell cell = theInstance.getCell(i, j);
+    				if(cell.isDoorway()) {
+    					switch(cell.getDoorDirection()) {
+    					case DoorDirection.UP:
+    						theInstance.getCell(i - 1, j).getRoom().addDoorway(cell);
+    						break;
+    					case DoorDirection.RIGHT:
+							theInstance.getCell(i, j + 1).getRoom().addDoorway(cell);
+    						break;
+    					case DoorDirection.DOWN:
+							theInstance.getCell(i + 1, j).getRoom().addDoorway(cell);
+    						break;
+    					case DoorDirection.LEFT:
+							theInstance.getCell(i, j - 1).getRoom().addDoorway(cell);
+    						break;
+    					default:
+    					}
+    				}
+    			}
     		}
     		reader.close();
 
@@ -203,6 +234,7 @@ public class Board {
     	// go through cells in adjacency list
         for (BoardCell cell : startCell.getAdjList()){
             // if visited or occupied, skip over
+        	System.out.println(startCell.getAdjList().size());
             if (visited.contains(cell) || cell.getOccupied()){
             }else{
                 // if the path ends here or cell is a room, end
@@ -221,25 +253,26 @@ public class Board {
 
     // make adjacency list for the board of cells
     private void createAdjList(){
-        for (int i = 0; i<MAX_ROW_RANGE; i++){
-            for (int j = 0; j<MAX_COL_RANGE; j++){
-                if(j>0){
-                    grid[i][j].addAdj(getCell(i,j-1));
+        for (int i = 0; i < MAX_ROW_RANGE; i++){
+            for (int j = 0; j < MAX_COL_RANGE; j++){
+                if(j > 0){
+                    grid[i][j].addAdj(getCell(i,j-1), theInstance);
                 }
-                if(i>0){
-                    grid[i][j].addAdj(getCell(i-1,j));
+                if(i > 0){
+                    grid[i][j].addAdj(getCell(i-1,j), theInstance);
                 }
-                if(i<MAX_ROW_RANGE-1){
-                    grid[i][j].addAdj(getCell(i+1,j));
+                if(i < MAX_ROW_RANGE-1){
+                    grid[i][j].addAdj(getCell(i+1,j), theInstance);
                 }
-                if(j<MAX_COL_RANGE-1){
-                    grid[i][j].addAdj(getCell(i,j+1));
+                if(j < MAX_COL_RANGE-1){
+                    grid[i][j].addAdj(getCell(i,j+1), theInstance);
                 }
             }
         }
     }
     
     public Set<BoardCell> getAdjList(int row, int col){
+		// return adjacency list for current position in grid
     	return grid[row][col].getAdjList();
     }
 

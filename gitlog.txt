@@ -1,6 +1,18 @@
 I, James Towle, certify that I participated equitably in the creation of assignment C15A-2, dated 3/11/25.
 I, Chloe Millham, certify that I participated equitably in the creation of assignment C15A-2, dated 3/11/25.
 
+commit f85b6366e495be101ea10f15c73429babc331ba3
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Mar 11 21:46:25 2025 -0600
+
+    Color coded board layout
+
+commit a571cd5d4cc5bf1ba788c3d934f6202c0d6caa78
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Mar 11 21:16:51 2025 -0600
+
+    added ClueLayout.xlsx to data
+
 commit 123d08531ff8fd57570d28bb459167e3d652694c
 Author: Nevtrality <james_towle@outlook.com>
 Date:   Tue Mar 11 20:30:03 2025 -0600
