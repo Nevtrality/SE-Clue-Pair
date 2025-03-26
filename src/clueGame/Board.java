@@ -234,8 +234,7 @@ public class Board {
     	// go through cells in adjacency list
         for (BoardCell cell : startCell.getAdjList()){
             // if visited or occupied, skip over
-        	System.out.println(startCell.getAdjList().size());
-            if (visited.contains(cell) || cell.getOccupied()){
+            if (visited.contains(cell) || (cell.getOccupied()&& !cell.isRoom())){
             }else{
                 // if the path ends here or cell is a room, end
                 if(pathlength==1 || cell.isRoom()){
