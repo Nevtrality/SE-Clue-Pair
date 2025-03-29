@@ -152,22 +152,22 @@ public class Board {
     			rowCount++;
     		}
 			// loops through board to add all doorways that lead to a particular room to the corresponding room's list
-    		for(int i = 0; i < MAX_ROW_RANGE; i++) {
-    			for(int j = 0; j < MAX_COL_RANGE; j++) {
-    				BoardCell cell = theInstance.getCell(i, j);
+    		for(int row = 0; row < MAX_ROW_RANGE; row++) {
+    			for(int col = 0; col < MAX_COL_RANGE; col++) {
+    				BoardCell cell = theInstance.getCell(row, col);
     				if(cell.isDoorway()) {
     					switch(cell.getDoorDirection()) {
     					case DoorDirection.UP:
-    						theInstance.getCell(i - 1, j).getRoom().addDoorway(cell);
+    						theInstance.getCell(row - 1, col).getRoom().addDoorway(cell);
     						break;
     					case DoorDirection.RIGHT:
-							theInstance.getCell(i, j + 1).getRoom().addDoorway(cell);
+							theInstance.getCell(row, col + 1).getRoom().addDoorway(cell);
     						break;
     					case DoorDirection.DOWN:
-							theInstance.getCell(i + 1, j).getRoom().addDoorway(cell);
+							theInstance.getCell(row + 1, col).getRoom().addDoorway(cell);
     						break;
     					case DoorDirection.LEFT:
-							theInstance.getCell(i, j - 1).getRoom().addDoorway(cell);
+							theInstance.getCell(row, col - 1).getRoom().addDoorway(cell);
     						break;
     					default:
     					}
