@@ -230,19 +230,19 @@ public class Board {
 
     // make adjacency list for the board of cells
     private void createAdjList(){
-        for (int i = 0; i < MAX_ROW_RANGE; i++){
-            for (int j = 0; j < MAX_COL_RANGE; j++){
-                if(j > 0){
-                    grid[i][j].addAdj(getCell(i,j-1), theInstance);
+        for (int row = 0; row < MAX_ROW_RANGE; row++){
+            for (int col = 0; col < MAX_COL_RANGE; col++){
+                if(col > 0){
+                    grid[row][col].addAdj(getCell(row,col-1), theInstance);
                 }
-                if(i > 0){
-                    grid[i][j].addAdj(getCell(i-1,j), theInstance);
+                if(row > 0){
+                    grid[row][col].addAdj(getCell(row-1,col), theInstance);
                 }
-                if(i < MAX_ROW_RANGE-1){
-                    grid[i][j].addAdj(getCell(i+1,j), theInstance);
+                if(row < MAX_ROW_RANGE-1){
+                    grid[row][col].addAdj(getCell(row+1,col), theInstance);
                 }
-                if(j < MAX_COL_RANGE-1){
-                    grid[i][j].addAdj(getCell(i,j+1), theInstance);
+                if(col < MAX_COL_RANGE-1){
+                    grid[row][col].addAdj(getCell(row,col+1), theInstance);
                 }
             }
         }
