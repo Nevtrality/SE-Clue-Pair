@@ -207,19 +207,6 @@ public class Board {
         return cell.getRoom();
     }
 
-
-//    public Board(){
-//        // set up 2d array of cells
-//        testboard = new BoardCell[MAX_ROW_RANGE][MAX_COL_RANGE];
-//        for (int i = 0; i<MAX_ROW_RANGE; i++){
-//            for (int j = 0; j<MAX_COL_RANGE; j++){
-//                testboard[i][j] =  new BoardCell(i,j);
-//            }
-//        }
-//        // create full adjacency lists
-//        createAdjList();
-//    }
-
     public void calcTargets(BoardCell startCell, int pathlength){
         // reset targetList
         targetList = new HashSet<BoardCell>();
