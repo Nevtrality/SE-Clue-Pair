@@ -88,11 +88,11 @@ public class Board {
     		Scanner reader = new Scanner(file);
     		// loop through each line of board
     		while(reader.hasNextLine()) {
-    			String data = reader.nextLine();
-    			String[] dataArray = data.split(",");
+    			String line = reader.nextLine();
+    			String[] splitLine = line.split(",");
     			columnCount = 0;
     			// loop through each column of board
-    			for(String cell : dataArray) {
+    			for(String cell : splitLine) {
     				columnCount++;
     			}
     			rowCount++;
@@ -116,11 +116,11 @@ public class Board {
     		rowCount = 0;
     		// loop through file's lines
     		while(reader.hasNextLine()) {
-    			String data = reader.nextLine();
-    			String[] dataArray = data.split(",");
+    			String line = reader.nextLine();
+    			String[] splitLine = line.split(",");
     			columnCount = 0;
     			// loop through each string in line separated by comma
-    			for(String string : dataArray) {
+    			for(String string : splitLine) {
     				grid[rowCount][columnCount] = new BoardCell(rowCount,columnCount);
     				BoardCell cell = grid[rowCount][columnCount];
     				//Check if room exists
@@ -204,11 +204,11 @@ public class Board {
         visited = new HashSet<BoardCell>();
         // add start cell
         visited.add(startCell);
-        verifier(startCell, pathlength);
+        cellCheck(startCell, pathlength);
         if(targetList.size()==0){targetList.add(startCell);} // base case for no valid moves
     }
 
-    private void verifier(BoardCell startCell, int pathlength){
+    private void cellCheck(BoardCell startCell, int pathlength){
     	// go through cells in adjacency list
         for (BoardCell cell : startCell.getAdjList()){
             // if visited or occupied, skip over
@@ -220,7 +220,7 @@ public class Board {
                 } else {
                     // otherwise add the cell
                     visited.add(cell);
-                    verifier(cell, pathlength-1);
+                    cellCheck(cell, pathlength-1);
                     visited.remove(cell);
                 }
             }
