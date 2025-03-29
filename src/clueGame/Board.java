@@ -59,17 +59,17 @@ public class Board {
 	    	// loop through each row
 	    	while(reader.hasNextLine()) {
 	    		// grab next line
-	    		String data = reader.nextLine();
+	    		String line = reader.nextLine();
 	    		// ignore commented parts of file
-	    		if(!(data.charAt(0) == '/')) {
+	    		if(!(line.charAt(0) == '/')) {
 	    			// split line into usable strings
-		    		String[] dataArray = data.split(", ");
+		    		String[] splitLine = line.split(", ");
 		    		//System.out.println(dataArray[0]);
-		    		if(!dataArray[0].equals( "Room" ) && !dataArray[0].equals( "Space")) {
+		    		if(!splitLine[0].equals( "Room" ) && !splitLine[0].equals( "Space")) {
 		    			throw new BadConfigFormatException("Area must be a room or a space");
 		    		}
-		    		roomMap.put(dataArray[2].charAt(0), new Room());
-		    		roomMap.get(dataArray[2].charAt(0)).setName(dataArray[1]); // set room name
+		    		roomMap.put(splitLine[2].charAt(0), new Room());
+		    		roomMap.get(splitLine[2].charAt(0)).setName(splitLine[1]); // set room name
 	    		}
 	    	}
 	    	reader.close();
@@ -213,11 +213,11 @@ public class Board {
         for (BoardCell cell : startCell.getAdjList()){
             // if visited or occupied, skip over
             if (visited.contains(cell) || (cell.getOccupied()&& !cell.isRoom())){
-            }else{
+            } else {
                 // if the path ends here or cell is a room, end
                 if(pathlength==1 || cell.isRoom()){
                     targetList.add(cell);
-                } else{
+                } else {
                     // otherwise add the cell
                     visited.add(cell);
                     verifier(cell, pathlength-1);
