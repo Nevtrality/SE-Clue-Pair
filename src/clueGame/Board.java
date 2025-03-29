@@ -104,6 +104,7 @@ public class Board {
     		e.printStackTrace();
     	}
     	
+		//set maximum row and column values
     	MAX_ROW_RANGE = rowCount;
     	MAX_COL_RANGE = columnCount;
     	
@@ -182,6 +183,7 @@ public class Board {
     	}
     }
 
+	//create get functions
     public int getNumRows() {
         return MAX_ROW_RANGE;
     }
