@@ -28,15 +28,6 @@ public class Board {
     //constructor private to ensure only 1 created
     private Board() {
     	super();
-    	// set up 2d array of cells
-//      grid = new BoardCell[MAX_ROW_RANGE][MAX_COL_RANGE];
-//      for (int i = 0; i<MAX_ROW_RANGE; i++){
-//          for (int j = 0; j<MAX_COL_RANGE; j++){
-//              grid[i][j] =  new BoardCell(i,j);
-//          }
-//      }
-//      // create full adjacency lists
-//      createAdjList();
     }
     // method returns only board
     public static Board getInstance() {
