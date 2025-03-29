@@ -1,5 +1,17 @@
-I, James Towle, certify that I participated equitably in the creation of assignment C15A-2, dated 3/11/25.
-I, Chloe Millham, certify that I participated equitably in the creation of assignment C15A-2, dated 3/11/25.
+I, James Towle, certify that I participated equitably in the creation of assignment C17A, dated 3/25/25.
+I, Chloe Millham, certify that I participated equitably in the creation of assignment C17A, dated 3/25/25.
+
+commit dce10be06aefe6bad3a027afc5b9f986240842e6
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Mar 25 18:27:27 2025 -0600
+
+    passed rest of tests and fixed minor mistakes in BoardAdjTargetTest tests
+
+commit 1beb6097d663d8a270579a09c63c35cebefcb9d3
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Mon Mar 24 18:49:43 2025 -0600
+
+    allowed first 3 tests of BoardAdjTargetTest.java to pass and fixed existing file issues
 
 commit f85b6366e495be101ea10f15c73429babc331ba3
 Author: cMillham <chloemillham@gmail.com>

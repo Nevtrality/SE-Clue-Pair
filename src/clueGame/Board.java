@@ -106,8 +106,8 @@ public class Board {
     			}
     			rowCount++;
     		}
-
     		reader.close();
+			// catch in place for the case of a file not found error
     	} catch (FileNotFoundException e) {
     		System.out.println("Error occurred when reading layout file");
     		e.printStackTrace();

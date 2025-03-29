@@ -40,11 +40,6 @@ public class BoardCell {
     		if((cell==board.getCell(row, col-1) && doorDirection == DoorDirection.LEFT) || (cell==board.getCell(row, col+1) && doorDirection == DoorDirection.RIGHT) || (cell==board.getCell(row+1, col) && doorDirection == DoorDirection.DOWN) || ((cell==board.getCell(row-1, col) && doorDirection == DoorDirection.UP) )) {
 				// if the intended cell is a room cell, grab the room's center cell and add it to list
 				if(!adjList.contains(cell.getRoom().getCenterCell())) {
-					if(cell.getRoom().getCenterCell()==null) {
-						System.out.println("true");
-						System.out.println(cell.getName());
-						System.out.println(cell.isRoom());
-					}
 					adjList.add(cell.getRoom().getCenterCell());
 				}
     		}
