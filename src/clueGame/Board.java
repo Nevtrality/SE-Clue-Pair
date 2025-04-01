@@ -17,6 +17,7 @@ public class Board {
     String layoutConfigFile;
     String setupConfigFile;
     Map<Character, Room> roomMap; // stores room name and character
+    Map<String, Card> cardMap; // Stores card info
 
 
     // Max range for calcTargets range
@@ -51,6 +52,7 @@ public class Board {
 
     public void loadSetupConfig() throws BadConfigFormatException{
     	roomMap = new HashMap<Character, Room>();
+    	cardMap = new HashMap<String, Card>();
     	
     	// open data file and put data in hashmap
     	try {
@@ -72,7 +74,7 @@ public class Board {
 			    		roomMap.get(splitLine[2].charAt(0)).setName(splitLine[1]); // set room name
 		    		}
 		    		if(!splitLine[0].equals("Space")) {
-		    			
+		    			cardMap.put(splitLine[1], new Card(splitLine[1], splitLine[0])); 
 		    		}
 	    		}
 	    	}
