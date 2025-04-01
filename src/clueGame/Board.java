@@ -64,12 +64,16 @@ public class Board {
 	    		if(!(line.charAt(0) == '/')) {
 	    			// split line into usable strings
 		    		String[] splitLine = line.split(", ");
-		    		//System.out.println(dataArray[0]);
-		    		if(!splitLine[0].equals( "Room" ) && !splitLine[0].equals( "Space")) {
+		    		if(!splitLine[0].equals( "Room" ) && !splitLine[0].equals( "Space") && !splitLine[0].equals( "Person") && !splitLine[0].equals( "Weapon")) {
 		    			throw new BadConfigFormatException("Area must be a room or a space");
 		    		}
-		    		roomMap.put(splitLine[2].charAt(0), new Room());
-		    		roomMap.get(splitLine[2].charAt(0)).setName(splitLine[1]); // set room name
+		    		if(splitLine[0].equals( "Room") || splitLine[0].equals( "Space")) {
+		    			roomMap.put(splitLine[2].charAt(0), new Room());
+			    		roomMap.get(splitLine[2].charAt(0)).setName(splitLine[1]); // set room name
+		    		}
+		    		if(!splitLine[0].equals("Space")) {
+		    			
+		    		}
 	    		}
 	    	}
 	    	reader.close();

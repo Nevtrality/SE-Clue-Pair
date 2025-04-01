@@ -11,3 +11,17 @@ Room, Morgue, G
 // other spaces on board
 Space, Unused, X
 Space, Hallway, W
+//People
+Person, Gregory House
+Person, Dr. Wilson
+Person, Allison Cameron
+Person, Lisa Cuddy
+Person, Thirteen
+Person, Eric Foreman
+//Weapons
+Weapon, House's Cane
+Weapon, Stethoscope
+Weapon, Mystery Vial
+Weapon, Scalpel
+Weapon, Cancer
+Weapon, Microscope
