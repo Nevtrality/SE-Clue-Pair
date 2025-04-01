@@ -1,5 +1,53 @@
-I, James Towle, certify that I participated equitably in the creation of assignment C17A, dated 3/25/25.
-I, Chloe Millham, certify that I participated equitably in the creation of assignment C17A, dated 3/25/25.
+I, James Towle, certify that I participated equitably in the creation of assignment C18A-2, dated 3/28/25.
+I, Chloe Millham, certify that I participated equitably in the creation of assignment C18A-2, dated 3/28/25.
+
+commit 6687db7124452e6e68e55a599841577e60e4086d
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Fri Mar 28 20:12:28 2025 -0600
+
+    added more descriptive comments in some functions
+
+commit 41b0f6f39d7e95587749573d171b4af0d5d4c8eb
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Fri Mar 28 20:09:57 2025 -0600
+
+    adjusted for loop variables to fit the context better on line 232
+
+commit 83650b76246bb4eac043898206ec3f14c76469bf
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Fri Mar 28 20:08:53 2025 -0600
+
+    adjusted for loop variables to fit the context better on line 155
+
+commit c3fec1161f78a32da3fadb773980f898777f79d2
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Fri Mar 28 20:02:55 2025 -0600
+
+    changed 'verifier' function name to 'cellCheck' to be more descriptive
+
+commit 7be1df940282994ba46660fc1a4e7212655e6a8e
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Fri Mar 28 19:57:48 2025 -0600
+
+    changed variable names to be more descriptive in Board.java
+
+commit 5bc65e0639df3be863f97c9e5ae352e7f85dc1ee
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Fri Mar 28 19:53:22 2025 -0600
+
+    deleted unused code block on line 31 of Board.java
+
+commit 0c484e80f820fcc2208f5beea97ada1a71136fc3
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Fri Mar 28 19:52:41 2025 -0600
+
+    deleted unused code on line 211 of Board.java
+
+commit a16621ac1ac3473dd834ada190e8bf04660301ab
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Fri Mar 28 19:50:17 2025 -0600
+
+    added a more descriptive comment on line 110 of Board.java
 
 commit dce10be06aefe6bad3a027afc5b9f986240842e6
 Author: Nevtrality <james_towle@outlook.com>
