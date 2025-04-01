@@ -264,4 +264,10 @@ public class Board {
         // return set/list created by calcTargets
         return targetList;
     }
+    
+    public void deal() {
+    	
+    }
+    
+ 
 }
