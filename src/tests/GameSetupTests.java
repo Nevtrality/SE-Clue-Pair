@@ -1,6 +1,7 @@
 package tests;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 
@@ -16,5 +17,20 @@ public class GameSetupTests {
 			board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");		
 			// Initialize will load config files 
 			board.initialize();
+		}
+		
+		@Test
+		public void testPeopleLoaded() {
+			
+		}
+		
+		@Test
+		public void testPlayerLoaded() {
+			
+		}
+		
+		@Test
+		public void testDeckLoaded() {
+			
 		}
 }

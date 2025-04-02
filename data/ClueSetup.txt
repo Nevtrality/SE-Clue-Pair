@@ -12,12 +12,12 @@ Room, Morgue, G
 Space, Unused, X
 Space, Hallway, W
 //People
-Person, Gregory House
-Person, Dr. Wilson
-Person, Allison Cameron
-Person, Lisa Cuddy
-Person, Thirteen
-Person, Eric Foreman
+Person, Gregory House, Red, Human, 9, 0
+Person, Dr. Wilson, Blue, Computer, 18, 0
+Person, Allison Cameron, Indigo, Computer, 28, 9
+Person, Lisa Cuddy, Orange, Computer, 28, 18
+Person, Thirteen, Green, Computer, 18, 27
+Person, Eric Foreman, Pink, Computer, 9, 27
 //Weapons
 Weapon, House's Cane
 Weapon, Stethoscope

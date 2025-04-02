@@ -12,12 +12,15 @@ public class Board {
 	private Set<BoardCell> targetList;
     private Set<BoardCell> visited;
     private BoardCell[][] grid;
+    private Card[] deck;
+    private Player[] players;
     int numRows;
     int numColumns;
+    int DECKSIZE = 21;
     String layoutConfigFile;
     String setupConfigFile;
+    Solution solution;
     Map<Character, Room> roomMap; // stores room name and character
-    Map<String, Card> cardMap; // Stores card info
 
 
     // Max range for calcTargets range
@@ -52,12 +55,15 @@ public class Board {
 
     public void loadSetupConfig() throws BadConfigFormatException{
     	roomMap = new HashMap<Character, Room>();
-    	cardMap = new HashMap<String, Card>();
+    	deck = new Card[DECKSIZE];
+    	players = new Player[6];
     	
     	// open data file and put data in hashmap
     	try {
 	    	File file = new File(setupConfigFile);
 	    	Scanner reader = new Scanner(file);
+	    	int countDeck = 0;
+	    	int countPlayer = 0;
 	    	// loop through each row
 	    	while(reader.hasNextLine()) {
 	    		// grab next line
@@ -74,9 +80,32 @@ public class Board {
 			    		roomMap.get(splitLine[2].charAt(0)).setName(splitLine[1]); // set room name
 		    		}
 		    		if(!splitLine[0].equals("Space")) {
-		    			cardMap.put(splitLine[1], new Card(splitLine[1], splitLine[0])); 
+		    			deck[countDeck] = new Card(splitLine[1], splitLine[0]);
+		    			countDeck++;
+		    		}
+		    		if(splitLine[0].equals("Person")) {
+		    			if(splitLine[3].equals("Human")) {
+		    				players[countPlayer] = new HumanPlayer(splitLine[1], splitLine[2], Integer.valueOf(splitLine[4]), Integer.valueOf(splitLine[5]));
+		    			} else {
+		    				players[countPlayer] = new ComputerPlayer(splitLine[1], splitLine[2], Integer.valueOf(splitLine[4]), Integer.valueOf(splitLine[5]));
+		    			}
+		    			countPlayer++;
 		    		}
 	    		}
+	    	}
+	    	// deal deck to solution
+	    	solution = new Solution(deck[(int)Math.random()%8+0], deck[(int)Math.random()%6+9], deck[(int)Math.random()%6+15]);
+	    	// deal deck to players
+	    	Card[] tempdeck = deck;
+	    	for(int i = DECKSIZE; i>0; i--) {
+	    		int num = (int)Math.random()%DECKSIZE;
+	    		Card card = tempdeck[num];
+	    		while(card==null) {
+	    			num = (int)Math.random()%DECKSIZE;
+	    			card = tempdeck[num];
+	    		}
+	    		players[i%6].updateHand(card);
+	    		tempdeck[num] = null;
 	    	}
 	    	reader.close();
     	} catch (FileNotFoundException e) {
@@ -205,6 +234,10 @@ public class Board {
     public Room getRoom(BoardCell cell) {
         return cell.getRoom();
     }
+    
+    public Card getCard(String card) {
+    	return deck.get(card);
+    }
 
     public void calcTargets(BoardCell startCell, int pathlength){
         // reset targetList
@@ -213,7 +246,7 @@ public class Board {
         // add start cell
         visited.add(startCell);
         cellCheck(startCell, pathlength);
-        if(targetList.size()==0){targetList.add(startCell);} // base case for no valid moves
+        if(targetList.size() == 0){targetList.add(startCell);} // base case for no valid moves
     }
 
     private void cellCheck(BoardCell startCell, int pathlength){
@@ -272,7 +305,7 @@ public class Board {
     }
     
     public void deal() {
-    	
+    	 
     }
     
  
