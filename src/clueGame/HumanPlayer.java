@@ -5,4 +5,7 @@ public class HumanPlayer extends Player{
 		super(name, color, row, column);
 	}
 
+	public String getType(){
+		return "Human";
+	}
 }

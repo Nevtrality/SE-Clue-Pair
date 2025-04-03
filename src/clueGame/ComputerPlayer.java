@@ -5,4 +5,8 @@ public class ComputerPlayer extends Player{
 		super(name, color, row, column);
 	}
 
+	public String getType(){
+		return "Computer";
+	}
+
 }

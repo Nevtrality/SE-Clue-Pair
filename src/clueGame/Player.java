@@ -1,14 +1,14 @@
 package clueGame;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Player {
 	private String name;
 	private Color color; 
 	private int row;
 	private int column;
-	List<Card> hand = new ArrayList<>();
+	Set<Card> hand = new HashSet<Card>();
 	
 	public Player(String name, String color, int row, int column){
 		this.name = name;
@@ -21,4 +21,21 @@ public abstract class Player {
 	public void updateHand(Card card) {
 		hand.add(card);
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public int getHandSize() {
+		return hand.size();
+	}
+	public Set<Card> getHand() {
+		return hand;
+	}
+	
+	public abstract String getType();
 }

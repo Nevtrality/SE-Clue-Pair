@@ -1,7 +1,7 @@
 // Rooms and room cards
 Room, Waiting Room, L
 Room, House Office, O
-Room, Breakroom, B
+Room, Break Room, B
 Room, MRI Room, M
 Room, Surgery Room, S
 Room, Clinic, C

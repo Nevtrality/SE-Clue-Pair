@@ -1,7 +1,10 @@
 package clueGame;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
@@ -12,7 +15,7 @@ public class Board {
 	private Set<BoardCell> targetList;
     private Set<BoardCell> visited;
     private BoardCell[][] grid;
-    private Card[] deck;
+    private List<Card> deck;
     private Player[] players;
     int numRows;
     int numColumns;
@@ -41,7 +44,11 @@ public class Board {
     public void initialize() {
     	try {
     		loadSetupConfig();
+    		System.out.println("whoops");
 			loadLayoutConfig();
+			System.out.println("whoops");
+			deal();
+			System.out.println("whoops");
 			theInstance.createAdjList();
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();
@@ -55,7 +62,7 @@ public class Board {
 
     public void loadSetupConfig() throws BadConfigFormatException{
     	roomMap = new HashMap<Character, Room>();
-    	deck = new Card[DECKSIZE];
+    	deck = new ArrayList<Card>();
     	players = new Player[6];
     	
     	// open data file and put data in hashmap
@@ -80,7 +87,7 @@ public class Board {
 			    		roomMap.get(splitLine[2].charAt(0)).setName(splitLine[1]); // set room name
 		    		}
 		    		if(!splitLine[0].equals("Space")) {
-		    			deck[countDeck] = new Card(splitLine[1], splitLine[0]);
+		    			deck.add(new Card(splitLine[1], splitLine[0]));
 		    			countDeck++;
 		    		}
 		    		if(splitLine[0].equals("Person")) {
@@ -92,20 +99,6 @@ public class Board {
 		    			countPlayer++;
 		    		}
 	    		}
-	    	}
-	    	// deal deck to solution
-	    	solution = new Solution(deck[(int)Math.random()%8+0], deck[(int)Math.random()%6+9], deck[(int)Math.random()%6+15]);
-	    	// deal deck to players
-	    	Card[] tempdeck = deck;
-	    	for(int i = DECKSIZE; i>0; i--) {
-	    		int num = (int)Math.random()%DECKSIZE;
-	    		Card card = tempdeck[num];
-	    		while(card==null) {
-	    			num = (int)Math.random()%DECKSIZE;
-	    			card = tempdeck[num];
-	    		}
-	    		players[i%6].updateHand(card);
-	    		tempdeck[num] = null;
 	    	}
 	    	reader.close();
     	} catch (FileNotFoundException e) {
@@ -226,6 +219,18 @@ public class Board {
     public int getNumColumns() {
         return MAX_COL_RANGE;
     }
+    
+    public Player[] getPlayers() {
+    	return players;
+    }
+
+	public List<Card> getDeck(){
+		return deck;
+	}
+
+	public Solution getSolution(){
+		return solution;
+	}
 
     public Room getRoom(char letter) {
         return roomMap.get(letter);
@@ -233,11 +238,7 @@ public class Board {
 
     public Room getRoom(BoardCell cell) {
         return cell.getRoom();
-    }
-    
-    public Card getCard(String card) {
-    	return deck.get(card);
-    }
+	}
 
     public void calcTargets(BoardCell startCell, int pathlength){
         // reset targetList
@@ -305,8 +306,31 @@ public class Board {
     }
     
     public void deal() {
-    	 
+			Random rand = new Random();
+    	 	// deal deck to solution
+	    	List<Card> tempdeck = new ArrayList<Card>();
+	    	for(Card card : deck) {
+	    		tempdeck.add(card);
+	    	}
+	    	int roomLoc = rand.nextInt(0,9);
+	    	int personLoc = rand.nextInt(9,15);
+	    	int weaponLoc = rand.nextInt(15,21);
+	    	solution = new Solution(deck.get(roomLoc), deck.get(personLoc), deck.get(weaponLoc));
+	    	tempdeck.remove(roomLoc);
+	    	tempdeck.remove(personLoc-1);
+	    	tempdeck.remove(weaponLoc-2);
+	    	// deal deck to players
+	    	for(int i = DECKSIZE - 3; i > 0; i--) {
+	    		int num = rand.nextInt(0,i);
+	    		Card card = tempdeck.get(num);
+	    		while(card==null) {
+	    			num = rand.nextInt(0,21);
+	    			System.out.println(num);
+	    			card = tempdeck.get(num);
+	    		}
+	    		players[i%6].updateHand(card);
+	    		tempdeck.remove(num);
+	    	}
     }
-    
  
 }
