@@ -31,32 +31,32 @@ public class GameSetupTest {
 		
 		@Test
 		public void testPeopleLoaded() {
-			Player[] players = board.getPlayers();
+			List<Player> players = board.getPlayers();
 			// Make sure all 6 players loaded in
-			assertEquals(players.length, 6);
+			assertEquals(players.size(), 6);
 			
 			// Make sure names and attributes are correct
-			assertEquals(players[0].getName(),"Gregory House");
-			assertEquals(players[1].getName(),"Dr. Wilson");
-			assertEquals(players[2].getName(),"Allison Cameron");
-			assertEquals(players[3].getName(),"Lisa Cuddy");
-			assertEquals(players[4].getName(),"Thirteen");
-			assertEquals(players[5].getName(),"Eric Foreman");
+			assertEquals(players.get(0).getName(),"Gregory House");
+			assertEquals(players.get(1).getName(),"Dr. Wilson");
+			assertEquals(players.get(2).getName(),"Allison Cameron");
+			assertEquals(players.get(3).getName(),"Lisa Cuddy");
+			assertEquals(players.get(4).getName(),"Thirteen");
+			assertEquals(players.get(5).getName(),"Eric Foreman");
 
-			assertEquals(players[1].getColor(), Color.getColor("Blue"));
-			assertEquals(players[4].getColor(), Color.getColor("Green"));
+			assertEquals(players.get(1).getColor(), Color.getColor("Blue"));
+			assertEquals(players.get(4).getColor(), Color.getColor("Green"));
 		}
 		
 		@Test
 		public void testPlayerLoaded() {
-			Player[] players = board.getPlayers();
+			List<Player> players = board.getPlayers();
 			// Make sure players have correct player and computer attributes
-			assertEquals(players[0].getType(),"Human");
-			assertEquals(players[1].getType(),"Computer");
-			assertEquals(players[2].getType(),"Computer");
-			assertEquals(players[3].getType(),"Computer");
-			assertEquals(players[4].getType(),"Computer");
-			assertEquals(players[5].getType(),"Computer");
+			assertEquals(players.get(0).getType(),"Human");
+			assertEquals(players.get(1).getType(),"Computer");
+			assertEquals(players.get(2).getType(),"Computer");
+			assertEquals(players.get(3).getType(),"Computer");
+			assertEquals(players.get(4).getType(),"Computer");
+			assertEquals(players.get(5).getType(),"Computer");
 			
 		}
 		
@@ -88,7 +88,7 @@ public class GameSetupTest {
 		@Test
 		public void testDeckDealt() {
 			Solution testSolution = board.getSolution();
-			Player[] players = board.getPlayers();
+			List<Player> players = board.getPlayers();
 			// test if solution contains 3 cards, one room, one person, one weapon
 			assertEquals(testSolution.getRoom().getCardType(), CardType.ROOM);
 			assertEquals(testSolution.getPerson().getCardType(), CardType.PERSON);
@@ -96,12 +96,12 @@ public class GameSetupTest {
 
 			// test if whole deck dealt
 				// add all cards held by players and solution to see if it same as deck size
-			assertEquals(players[0].getHandSize(), 3);
-			assertEquals(players[1].getHandSize(), 3);
-			assertEquals(players[2].getHandSize(), 3);
-			assertEquals(players[3].getHandSize(), 3);
-			assertEquals(players[4].getHandSize(), 3);
-			assertEquals(players[5].getHandSize(), 3);
+			assertEquals(players.get(0).getHandSize(), 3);
+			assertEquals(players.get(1).getHandSize(), 3);
+			assertEquals(players.get(2).getHandSize(), 3);
+			assertEquals(players.get(3).getHandSize(), 3);
+			assertEquals(players.get(4).getHandSize(), 3);
+			assertEquals(players.get(5).getHandSize(), 3);
 			// test that no duplicate cards
 			Set<Card> found = new HashSet<Card>(); 
 			for(Player person : players) {

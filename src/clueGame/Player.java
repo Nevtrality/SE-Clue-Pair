@@ -2,14 +2,15 @@ package clueGame;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
 
 public abstract class Player {
-	private String name;
-	private Color color; 
-	private int row;
-	private int column;
+	String name;
+	Color color; 
+	int row;
+	int column;
 	List<Card> hand = new ArrayList<Card>();
 	Set<Card> seenCards = new HashSet<Card>();
 	
@@ -30,9 +31,22 @@ public abstract class Player {
 	}
 	
 	public Card disproveSuggestion(Solution suggestion) {
-		// loop through cards in suggestion
-			// if matches card in hand
-			// return that card (if multiple return random one)
+		List<Card> matchingCards = new ArrayList<Card>();
+		// check room in suggestion
+		if (hand.contains(suggestion.getRoom())) {
+			matchingCards.add(suggestion.getRoom());
+		}
+		// check person in suggestion
+		if (hand.contains(suggestion.getPerson())) {
+			matchingCards.add(suggestion.getRoom());
+		}
+		// check weapon in suggestion
+		if (hand.contains(suggestion.getWeapon())) {
+			matchingCards.add(suggestion.getRoom());
+		}
+		// return a random card in matchingCards (should return null if list is empty)
+		Random rand = new Random();
+		return matchingCards.get(rand.nextInt(0,matchingCards.size()));
 	}
 	
 	public String getName() {
