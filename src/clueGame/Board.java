@@ -16,10 +16,11 @@ public class Board {
     private Set<BoardCell> visited;
     private BoardCell[][] grid;
     private List<Card> deck;
-    private Player[] players;
+    private List<Player> players;
     int numRows;
     int numColumns;
     int DECKSIZE = 21;
+    int PLAYERCOUNT = 6;
     String layoutConfigFile;
     String setupConfigFile;
     Solution solution;
@@ -63,7 +64,7 @@ public class Board {
     public void loadSetupConfig() throws BadConfigFormatException{
     	roomMap = new HashMap<Character, Room>();
     	deck = new ArrayList<Card>();
-    	players = new Player[6];
+    	players = new ArrayList<Player>();
     	
     	// open data file and put data in hashmap
     	try {
@@ -92,9 +93,9 @@ public class Board {
 		    		}
 		    		if(splitLine[0].equals("Person")) {
 		    			if(splitLine[3].equals("Human")) {
-		    				players[countPlayer] = new HumanPlayer(splitLine[1], splitLine[2], Integer.valueOf(splitLine[4]), Integer.valueOf(splitLine[5]));
+		    				players.add(new HumanPlayer(splitLine[1], splitLine[2], Integer.valueOf(splitLine[4]), Integer.valueOf(splitLine[5])));
 		    			} else {
-		    				players[countPlayer] = new ComputerPlayer(splitLine[1], splitLine[2], Integer.valueOf(splitLine[4]), Integer.valueOf(splitLine[5]));
+		    				players.add(new ComputerPlayer(splitLine[1], splitLine[2], Integer.valueOf(splitLine[4]), Integer.valueOf(splitLine[5])));
 		    			}
 		    			countPlayer++;
 		    		}
@@ -210,6 +211,35 @@ public class Board {
     		e.printStackTrace();
     	}
     }
+    
+    public boolean checkAccusation(Solution accusation) {
+    	// if room = solution.room, person = solution.person, and weapon = solution.weapon
+    	if (solution.getRoom().equals(accusation.getRoom()) && solution.getPerson().equals(accusation.getPerson()) && solution.getWeapon().equals(accusation.getWeapon())) {
+    		// return true
+    		return true;
+    	} else {
+    		// else publicly execute player
+    		return false;
+    	}
+    }
+    
+    public Card handleSuggestion(Player suggester, Solution suggestion) {
+    	Card proof;
+    	// calls players disprove solution to see if they have card to disprove
+    	for(Player player:players) {
+    		// skip over player that suggested the solution
+    		if(player != suggester) {
+    			// temp variable to hold result of disproveSuggestion
+    			proof = player.disproveSuggestion(suggestion);
+    			// if it returned a card, return that card and exit function
+    			if(proof != null) {
+    				return proof;
+    			}
+    		}
+    	}
+    	// No players could disprove, so return null
+    	return null;
+    }
 
 	//create get functions
     public int getNumRows() {
@@ -220,7 +250,7 @@ public class Board {
         return MAX_COL_RANGE;
     }
     
-    public Player[] getPlayers() {
+    public List<Player> getPlayers() {
     	return players;
     }
 
@@ -328,7 +358,7 @@ public class Board {
 	    			System.out.println(num);
 	    			card = tempdeck.get(num);
 	    		}
-	    		players[i%6].updateHand(card);
+	    		players.get(i%6).updateHand(card);
 	    		tempdeck.remove(num);
 	    	}
     }

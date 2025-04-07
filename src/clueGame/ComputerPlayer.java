@@ -8,5 +8,13 @@ public class ComputerPlayer extends Player{
 	public String getType(){
 		return "Computer";
 	}
+	
+	public Solution createSuggestion() {
+		
+	}
+	
+	public BoardCell selectTarget() {
+		
+	}
 
 }

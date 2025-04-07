@@ -15,7 +15,7 @@ import clueGame.Card;
 import clueGame.Solution;
 import clueGame.CardType;
 
-public class GameSetupTests {
+public class GameSetupTest {
 	// static because can only load one at a time
 		private static Board board;
 		

@@ -1,14 +1,17 @@
 package clueGame;
 import java.awt.Color;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 
 public abstract class Player {
 	private String name;
 	private Color color; 
 	private int row;
 	private int column;
-	Set<Card> hand = new HashSet<Card>();
+	List<Card> hand = new ArrayList<Card>();
+	Set<Card> seenCards = new HashSet<Card>();
 	
 	public Player(String name, String color, int row, int column){
 		this.name = name;
@@ -22,6 +25,16 @@ public abstract class Player {
 		hand.add(card);
 	}
 	
+	public void updateSeen(Card seenCard) {
+		seenCards.add(seenCard);
+	}
+	
+	public Card disproveSuggestion(Solution suggestion) {
+		// loop through cards in suggestion
+			// if matches card in hand
+			// return that card (if multiple return random one)
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -33,7 +46,7 @@ public abstract class Player {
 	public int getHandSize() {
 		return hand.size();
 	}
-	public Set<Card> getHand() {
+	public List<Card> getHand() {
 		return hand;
 	}
 	

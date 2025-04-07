@@ -1,5 +1,41 @@
-I, James Towle, certify that I participated equitably in the creation of assignment C18A-2, dated 3/28/25.
-I, Chloe Millham, certify that I participated equitably in the creation of assignment C18A-2, dated 3/28/25.
+I, James Towle, certify that I participated equitably in the creation of assignment C19A, dated 4/02/25.
+I, Chloe Millham, certify that I participated equitably in the creation of assignment C19A, dated 4/02/25.
+
+commit 33b4647c4a1ae8c5ea599892dca6b26936d8aed2
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Wed Apr 2 23:43:03 2025 -0600
+
+    adjusted code so tests pass
+
+commit 6339a4b5d64ad48f6f8c094d41f483bdcff2779f
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Apr 1 19:15:08 2025 -0600
+
+    filling in the function bodies
+
+commit d4bfaf9979e1b9caf3c8854d753fb45c1ae12aea
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Apr 1 17:46:26 2025 -0600
+
+    oops we forgot to write tests
+
+commit 97e59fd8e13d587135a41d46640f66315750e764
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 1 17:34:18 2025 -0600
+
+    updated ClueSetup and Card
+
+commit 48b5b77380390aae8fe21e8a3bc6b49fde57f756
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 1 16:27:44 2025 -0600
+
+    UML diagram skeleton
+
+commit cf4e4669341586c1fa7eafb93f397fb65ea7a3e2
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Apr 1 15:48:28 2025 -0600
+
+    updating everything
 
 commit 6687db7124452e6e68e55a599841577e60e4086d
 Author: Nevtrality <james_towle@outlook.com>
