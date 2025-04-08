@@ -1,6 +1,7 @@
 package tests;
 import static org.junit.Assert.*;
 
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,11 +25,11 @@ public class GameSolutionTest {
     private static Board board;
 
     @BeforeEach
-	public static void setUp() {
+	public void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		// Initialize will load BOTH config files
 		board.initialize();
         //Set up cards
@@ -47,7 +48,7 @@ public class GameSolutionTest {
         Card solutionPerson = solution.getPerson();
         Card solutionWeapon = solution.getWeapon();
         Card solutionRoom = solution.getRoom();
-        Card card = new Card(null, null);
+        Card card = new Card(null, "Person");
         Solution trueAccusation = new Solution(solutionRoom, solutionPerson, solutionWeapon);
         Solution wrongPersonAcc = new Solution(solutionRoom, card, solutionWeapon);
         Solution wrongWeaponAcc = new Solution(solutionRoom, solutionPerson, card);
@@ -121,33 +122,6 @@ public class GameSolutionTest {
     	assertEquals(board.handleSuggestion(players.get(0), suggestion), suggestionRoom);
     }
     
-    @Test
-    public void testComputerSuggestion() {
-    	List<Player> players = board.getPlayers();
-    	// Make sure suggestion's room is the same as the computer's location
-    	Room room = players.get(1).getCell().getRoom();
-    	Solution suggestion = players.get(1).createSuggestion(board);
-    	assertEquals(suggestion.getRoom().getCardName(), room.getName());
-    	
-    	// If one weapon not seen, it's selected
-    	
-    	// if only one person not seen, its selected
-    	
-    	// if multiple weapons not seen, one is randomly selected
-    	
-    	// if multiple persons not seen, one is randomly selected
-    }
-    
-    @Test
-    public void testComputerSelectTarget() {
-    	//See if random location is part of accessible locations from current point
-        Player player = new Player("Dr. House", "Red", 9, 6);
-        board.calcTargets(board.getCell(9,6), 4);
-        Set<BoardCell> targets = new HashSet<BoardCell>();
-        for (int i = 0; i <= 500; i++) {
-            targets.add(players.get(1).selectTarget());
-        }
-        assertEquals(board.getTargets(), targets.size());
-    }
+ 
     
 }

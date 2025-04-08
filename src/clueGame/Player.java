@@ -46,6 +46,9 @@ public abstract class Player {
 		}
 		// return a random card in matchingCards (should return null if list is empty)
 		Random rand = new Random();
+		if(matchingCards.size() == 0) {
+			return null;
+		}
 		return matchingCards.get(rand.nextInt(0,matchingCards.size()));
 	}
 	
@@ -65,4 +68,9 @@ public abstract class Player {
 	}
 	
 	public abstract String getType();
+
+	public abstract Solution createSuggestion(Board board);
+
+	public abstract BoardCell selectTarget(Board board, int i);
+
 }

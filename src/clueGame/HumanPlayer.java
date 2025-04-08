@@ -8,4 +8,16 @@ public class HumanPlayer extends Player{
 	public String getType(){
 		return "Human";
 	}
+
+	@Override
+	public Solution createSuggestion(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BoardCell selectTarget(Board board, int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -106,10 +106,10 @@ public class FileInitTests {
 		room = board.getRoom(cell);
 		assertEquals(room.getName(), board.getRoom('D').getName());
 		
-		// test H and Hallway
+		// test W and Walkway
 		cell = board.getCell(0, 8);
 		room = board.getRoom(cell);
-		assertEquals(room.getName(), board.getRoom('H').getName());
+		assertEquals(room.getName(), board.getRoom('W').getName());
 		
 		// test X and Unused
 		cell = board.getCell(0, 10);
