@@ -19,6 +19,7 @@ import clueGame.Room;
 import clueGame.Card;
 import clueGame.Solution;
 import clueGame.CardType;
+import clueGame.ComputerPlayer;
 
 public class GameSolutionTest {
 
@@ -32,13 +33,6 @@ public class GameSolutionTest {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		// Initialize will load BOTH config files
 		board.initialize();
-        //Set up cards
-        Card houseCard = new Card("Gregory House", "Person");
-        Card cuddyCard = new Card("Lisa Cuddy", "Person");
-        Card caneCard = new Card("House's cane", "Weapon");
-        Card scalpelCard = new Card("Scalpel", "Weapon");
-        Card waitingRoomCard = new Card("Waiting Room", "Room");
-        Card morgueCard = new Card("Morgue", "Room");
 
 	}
 
@@ -55,7 +49,7 @@ public class GameSolutionTest {
         Solution wrongRoomAcc = new Solution(card, solutionPerson, solutionWeapon);
 
         //Solution that is correct
-        assertEquals(solution, trueAccusation);
+        assertTrue(board.checkAccusation(trueAccusation));
         //Solution with wrong person
         assertFalse(board.checkAccusation(wrongPersonAcc));
         //Solution with wrong weapon
@@ -74,19 +68,25 @@ public class GameSolutionTest {
         Card solutionRoom = solution.getRoom();
         List<Card>  player1Hand = players.get(1).getHand();
         
-        Solution suggestion = new Solution(null, null, player1Hand.get(0)); 
+        Player player = new ComputerPlayer("Dr. House", "Red", 3, 3);
+        Card card = new Card("card", "Room");
+        player.updateHand(card);
+        Solution suggestion = new Solution(card, new Card("", ""), new Card("", "")); 
         //If player has only one matching card is should be returned
-        assertEquals(player1Hand.get(0), players.get(1).disproveSuggestion(suggestion));
+        assertEquals(card, player.disproveSuggestion(suggestion));
+        
         //If players has >1 matching card, returned card should be chosen randomly
-        suggestion = new Solution(player1Hand.get(2), player1Hand.get(1), player1Hand.get(0));
+        Card secondCard = new Card("card 2", "Person");
+        player.updateHand(secondCard);
+        suggestion = new Solution(card, secondCard, new Card("", ""));
         Set<Card> seenCards = new HashSet<Card>();
-        for(int i = 0; i <= 20; i++) {
-            seenCards.add(players.get(1).disproveSuggestion(suggestion));
+        for(int i = 0; i <= 200; i++) {
+            seenCards.add(player.disproveSuggestion(suggestion));
         }
-        assertEquals(3, seenCards.size());
+        assertEquals(2, seenCards.size());
         //If player has no matching cards, null is returned
-        suggestion = new Solution(null, null, null);
-        assertEquals(players.get(1).disproveSuggestion(suggestion), null);
+        suggestion = new Solution(player1Hand.get(0), player1Hand.get(1), player1Hand.get(2));
+        assertEquals(player.disproveSuggestion(suggestion), null);
     }
 
     @Test

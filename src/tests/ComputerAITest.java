@@ -33,75 +33,52 @@ public class ComputerAITest {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		// Initialize will load BOTH config files
 		board.initialize();
-        //Set up cards
-        Card houseCard = new Card("Gregory House", "Person");
-        Card cuddyCard = new Card("Lisa Cuddy", "Person");
-        Card caneCard = new Card("House's cane", "Weapon");
-        Card scalpelCard = new Card("Scalpel", "Weapon");
-        Card waitingRoomCard = new Card("Waiting Room", "Room");
-        Card morgueCard = new Card("Morgue", "Room");
 
 	}
 
 	
 	 @Test
 	    public void testComputerSuggestion() {
-	    	List<Player> players = board.getPlayers();
+	    	Player player = new ComputerPlayer("Dr. House", "Red", 3, 3);
 	    	// Make sure suggestion's room is the same as the computer's location
 	    	Room room = board.getCell(0, 0).getRoom();
-	    	Solution suggestion = players.get(1).createSuggestion(board);
+	    	Solution suggestion = player.createSuggestion(board);
 	    	assertEquals(suggestion.getRoom().getCardName(), room.getName());
 	    	
 	    	// If one weapon not seen, it's selected
-	    	Player player = new ComputerPlayer("Dr. House", "Red", 9, 6);
-	    	boolean firstCard = true;
-	    	Card weaponCheck = null;
+	    	player = new ComputerPlayer("Dr. House", "Red", 9, 6);
+	    	Solution soln = board.getSolution();
 	    	for(Card card : board.getDeck()) {
 	    		if(card.getCardType() == CardType.WEAPON) {
-	    			Solution soln = board.getSolution();
 	    			if(card == soln.getWeapon()) {
 	    				continue;
 	    			}
-	    			if(!firstCard) {
-	    				player.updateSeen(card);
-	    			}
-	    			else {
-	    				firstCard = false;
-	    				weaponCheck = card;
-	    			}
+    				player.updateSeen(card);
 	    		}
 	    		
 	    	}
 	      
 	    	suggestion = player.createSuggestion(board);
-	    	assertEquals(suggestion.getWeapon(), weaponCheck);
+	    	assertEquals(suggestion.getWeapon(), soln.getWeapon());
 	    	
 	    	
-	    	// if only one person not seen, its selected
-	    	player = new ComputerPlayer("Dr. House", "Red", 9, 6);
-	    	firstCard = true;
-	    	Card personCheck = null;
+	    	// if only one person not seen, it's selected
+	    	soln = board.getSolution();
 	    	for(Card card : board.getDeck()) {
 	    		if(card.getCardType() == CardType.PERSON) {
-	    			Solution soln = board.getSolution();
 	    			if(card == soln.getPerson()) {
 	    				continue;
 	    			}
-	    			if(!firstCard) {
-	    				player.updateSeen(card);
-	    			}
-	    			else {
-	    				firstCard = false;
-	    				personCheck = card;
-	    			}
+    				player.updateSeen(card);
 	    		}
 	    		
 	    	}
 	      
 	    	suggestion = player.createSuggestion(board);
-	    	assertEquals(suggestion.getPerson(), personCheck);
+	    	assertEquals(suggestion.getPerson(), soln.getPerson());
 	    	
 	    	// if multiple weapons not seen, one is randomly selected
+	    	player = new ComputerPlayer("Dr. House", "Red", 9, 6);
 	    	Set<Card> seenCards = new HashSet<Card>();
 	        for(int i = 0; i <= 100; i++) {
 	            seenCards.add(player.createSuggestion(board).getWeapon());

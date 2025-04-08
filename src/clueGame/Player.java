@@ -32,24 +32,23 @@ public abstract class Player {
 	
 	public Card disproveSuggestion(Solution suggestion) {
 		List<Card> matchingCards = new ArrayList<Card>();
-		// check room in suggestion
-		if (hand.contains(suggestion.getRoom())) {
-			matchingCards.add(suggestion.getRoom());
-		}
-		// check person in suggestion
-		if (hand.contains(suggestion.getPerson())) {
-			matchingCards.add(suggestion.getRoom());
-		}
-		// check weapon in suggestion
-		if (hand.contains(suggestion.getWeapon())) {
-			matchingCards.add(suggestion.getRoom());
-		}
+		// check if player holds a suggested card
+		for (Card card : hand) {
+	        if (card.equals(suggestion.getPerson()) || 
+	            card.equals(suggestion.getWeapon()) || 
+	            card.equals(suggestion.getRoom())) {
+	            matchingCards.add(card);
+	        }
+	    }
 		// return a random card in matchingCards (should return null if list is empty)
 		Random rand = new Random();
 		if(matchingCards.size() == 0) {
 			return null;
 		}
-		return matchingCards.get(rand.nextInt(0,matchingCards.size()));
+		if (matchingCards.size() == 1) {
+			return matchingCards.get(0);
+		}
+		return matchingCards.get(rand.nextInt(matchingCards.size()));
 	}
 	
 	public String getName() {

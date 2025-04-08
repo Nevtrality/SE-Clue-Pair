@@ -22,14 +22,14 @@ public class ComputerPlayer extends Player{
 		// loop through each suggestion card type
 		for(int i = 0; i<3; i++) {
 			// grab random card within the suggestion's card type range
-			if (i==0) {
+			if (i == 0) {
 				suggestionList[i] = deck.get(rand.nextInt(0,9));
 			} else {
 				suggestionList[i] = deck.get(rand.nextInt(9 + (6*(i-1)), 9+(6*i)));
 			} 
 			// while the random card is in either the computer's hand or seen cards, reroll the card
 			while(hand.contains(suggestionList[i]) || seenCards.contains(suggestionList[i])) {
-				if (i==0) {
+				if (i == 0) {
 					suggestionList[i] = deck.get(rand.nextInt(0,9));
 				} else {
 					suggestionList[i] = deck.get(rand.nextInt(9 + (6*(i-1)), 9+(6*i)));
@@ -37,7 +37,15 @@ public class ComputerPlayer extends Player{
 			}
 		}
 		// return the solution stored in the suggestion list
-		return new Solution(suggestionList[0],suggestionList[1],suggestionList[2]);
+		Card currRoom = null;
+		BoardCell cell = board.getCell(row, column);
+			String roomName = cell.getRoom().getName();
+			for(Card card : board.getDeck()) {
+				if(card.getCardName().equals(roomName)) {
+					currRoom = card;
+				}
+			}
+		return new Solution(currRoom, suggestionList[1], suggestionList[2]);
 	}
 	
 	public BoardCell selectTarget(Board board, int rollNum) {
@@ -48,6 +56,19 @@ public class ComputerPlayer extends Player{
 		// set up random and get a random number from 0 to targets size
 		Random rand = new Random();
 		int targetNum = rand.nextInt(0,targets.size());
+		Card roomCard = null;
+		//check each cell in targets and if it is a room center and hasn't been seen, return the cell
+		for(BoardCell cell : targets) {
+			String roomName = cell.getRoom().getName();
+			for(Card cards : board.getDeck()) {
+				if(cards.getCardName().equals(roomName)) {
+					roomCard = cards; 
+				}
+			}
+			if(cell.isRoomCenter() && !seenCards.contains(roomCard)) {
+				return cell;
+			}
+		}
 		// create iterating variable
 		int i = 0;
 		for(BoardCell target: targets) {

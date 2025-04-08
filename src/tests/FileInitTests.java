@@ -35,11 +35,11 @@ public class FileInitTests {
 	public void testRoomLabels() {
 		// To ensure data is correctly loaded, test retrieving a few rooms
 		// include first, last, and a few others
-		assertEquals("Waiting Room", board.getRoom('W').getName() );
-		assertEquals("Breakroom", board.getRoom('B').getName());
+		assertEquals("Waiting Room", board.getRoom('L').getName() );
+		assertEquals("Break Room", board.getRoom('B').getName());
 		assertEquals("Psych Ward", board.getRoom('P').getName());
 		assertEquals("Morgue", board.getRoom('G').getName());
-		assertEquals("Hallway", board.getRoom('H').getName());
+		assertEquals("Hallway", board.getRoom('W').getName());
 	}
 
 	//ensure correct number of rows/columns have been read
