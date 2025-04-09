@@ -1,5 +1,26 @@
-I, James Towle, certify that I participated equitably in the creation of assignment C19A, dated 4/02/25.
-I, Chloe Millham, certify that I participated equitably in the creation of assignment C19A, dated 4/02/25.
+commit e3a12ec401b125bb923f5dfcc558207d761d7671
+Author: cMillham <chloemillham@gmail.com>
+Date:   Mon Apr 7 23:51:13 2025 -0600
+
+    Implemented all functions so all tests pass
+
+commit c45eb8de044d2d2953cbb82fbe62e9dfcb0b108b
+Author: cMillham <chloemillham@gmail.com>
+Date:   Mon Apr 7 18:10:23 2025 -0600
+
+    All tests written, compile, and fail
+
+commit 126f2ba0459c3ecbfdbbd2f32e5121e9e879ecaf
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sun Apr 6 22:59:07 2025 -0600
+
+    added some tests and adjusted methods so they no longer error
+
+commit 030c5a96d9c40b29844c139d89167e60713363d3
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sun Apr 6 21:31:16 2025 -0600
+
+    setup test files and added method skeletons
 
 commit 33b4647c4a1ae8c5ea599892dca6b26936d8aed2
 Author: Nevtrality <james_towle@outlook.com>
