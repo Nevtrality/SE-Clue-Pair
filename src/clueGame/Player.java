@@ -1,5 +1,6 @@
 package clueGame;
 import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +17,12 @@ public abstract class Player {
 	
 	public Player(String name, String color, int row, int column){
 		this.name = name;
-		this.color = Color.getColor(color);
+		try {
+		    Field field = Color.class.getField(color);
+		    this.color = (Color)field.get(null);
+		} catch (Exception e) {
+		    this.color = null; // Not defined
+		}
 		this.row = row;
 		this.column = column;
 		

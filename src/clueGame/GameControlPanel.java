@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import clueGame.Card;
 import clueGame.CardType;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -39,9 +40,9 @@ public class GameControlPanel extends JPanel {
 				// contains roll indicator
 				innerPanel = new JPanel();
 				innerPanel.setLayout(new GridLayout(3,0));
-					JPanel innerInnerPanel = new JPanel();
+					JPanel innerInnerPanel = new JPanel(); // only here so it looks nicer
 					innerInnerPanel.setLayout(new GridLayout(0,4));
-					innerInnerPanel.add(new JPanel());
+					innerInnerPanel.add(new JPanel()); // add empty space to make it prettier
 					createJLabel(innerInnerPanel, "Roll:");
 					rollIndicator = new JTextField();
 					innerInnerPanel.add(rollIndicator); // add text field
@@ -56,7 +57,7 @@ public class GameControlPanel extends JPanel {
 				// contains next turn button
 				innerPanel = new JPanel();
 				innerPanel.setLayout(new GridLayout(1,0));
-					JButton nextTurn = new JButton("NEXT");
+					JButton nextTurn = new JButton("NEXT!");
 					innerPanel.add(nextTurn);
 			panel.add(innerPanel);
 			
@@ -95,7 +96,9 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	public void setTurn(ComputerPlayer cpu, int roll) {
-		turnIndicator.setText(cpu.getName());
+		turnIndicator.setText(cpu.getName()); 
+		Color color = cpu.getColor();
+		turnIndicator.setBackground(color);
 		rollIndicator.setText(String.valueOf(roll));
 	}
 
@@ -110,7 +113,7 @@ public class GameControlPanel extends JPanel {
 		frame.setVisible(true); // make it visible
 		
 		// test filling in the data
-		panel.setTurn(new ComputerPlayer( "Col. Mustard", "orange", 0, 0), 5);
+		panel.setTurn(new ComputerPlayer( "Col. Mustard", "ORANGE", 0, 0), 5);
 		panel.setGuess( "I have no guess!");
 		panel.setGuessResult( "So you have nothing?");
 	}
