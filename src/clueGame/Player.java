@@ -71,6 +71,9 @@ public abstract class Player {
 	public List<Card> getHand() {
 		return hand;
 	}
+	public Set<Card> getSeen(){
+		return seenCards;
+	}
 	
 	public abstract String getType();
 

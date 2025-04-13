@@ -1,3 +1,24 @@
+I, James Towle, certify that I participated equitably in the creation of assignment C21A-1, dated 4/10/25.
+I, Chloe Millham, certify that I participated equitably in the creation of assignment C21A-1, dated 4/10/25.
+
+commit 28b315e3e1031166617252fa224dcb78e50cf5b3
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Thu Apr 10 16:12:58 2025 -0600
+
+    fixed player.getColor and added a colored text box
+
+commit c22ca1277160bbc55fa263b5061f7e180a852cc0
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Thu Apr 10 15:48:56 2025 -0600
+
+    created and filled out GUI file
+
+commit 1eb856c1b9062f2c3ecd2a2c3c789f71932eb880
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 8 20:49:48 2025 -0600
+
+    added provided code stubs from assignment
+
 commit e3a12ec401b125bb923f5dfcc558207d761d7671
 Author: cMillham <chloemillham@gmail.com>
 Date:   Mon Apr 7 23:51:13 2025 -0600
