@@ -102,7 +102,7 @@ public class GameCardPanel extends JPanel{
 		}
 		
 		// update Players
-		playerPanel = new JPanel();
+		playerPanel.removeAll();
 		playerPanel.setLayout(new GridLayout(2,0));
 			// add border
 			playerPanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
@@ -111,10 +111,10 @@ public class GameCardPanel extends JPanel{
 			// update seen panel
 			playerPanel.add(updateSeenPanel(seenPerson));
 		
-		add(playerPanel);
+		playerPanel.revalidate();
 			
 		// update rooms
-		roomPanel = new JPanel();
+		roomPanel.removeAll();
 		roomPanel.setLayout(new GridLayout(2,0));
 			// add border
 			roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
@@ -123,10 +123,10 @@ public class GameCardPanel extends JPanel{
 			// update seen panel
 			roomPanel.add(updateSeenPanel(seenRoom));
 		
-		add(roomPanel);
+		roomPanel.revalidate();
 		
 		// update weapons
-		weaponPanel = new JPanel();
+		weaponPanel.removeAll();
 		weaponPanel.setLayout(new GridLayout(2,0));
 			// add border
 			weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
@@ -135,33 +135,45 @@ public class GameCardPanel extends JPanel{
 			// update seen panel
 			weaponPanel.add(updateSeenPanel(seenWeapon));
 		
-		add(weaponPanel);
+		weaponPanel.revalidate();
 	}
 	
 	private JPanel updateHandPanel(List<Card> hand) {
 		JPanel handPanel = new JPanel();
-		handPanel.setLayout(new GridLayout(2+hand.size(),0));
+		// formatting layout
+		if(hand.size()<1) {
+			handPanel.setLayout(new GridLayout(2+hand.size(),0));
+		} else {
+			handPanel.setLayout(new GridLayout(1+hand.size(),0));
+		}
 			// create label
 			createJLabel(handPanel, "In Hand:");
-			JTextField handCards;
+			JTextField handCards = new JTextField();
 			// if the list is empty, return a single text field with "None"
-			if(hand.size() == 0) {
-				handCards = new JTextField();
-				handCards.setText("None");
-				handPanel.add(handCards);
-			} else {
+			if(hand.size() > 0) {
+				System.out.println("ran");
 				// loop through list of cards and add to panel
 				for (Card card: hand) {
+					System.out.println(card.getCardName());
 					handCards = new JTextField(card.getCardName());
 					handPanel.add(handCards);
 				}
+			} else {
+				handCards = new JTextField();
+				handCards.setText("None");
+				handPanel.add(handCards);
 			}
 		return handPanel;
 	}
 	
 	private JPanel updateSeenPanel(List<Card> seen) {
 		JPanel seenPanel = new JPanel();
-		seenPanel.setLayout(new GridLayout(2+seen.size(),0));
+		// formatting layout
+		if(seen.size()<1) {
+			seenPanel.setLayout(new GridLayout(2+seen.size(),0));
+		} else {
+			seenPanel.setLayout(new GridLayout(1+seen.size(),0));
+		}
 			// create label
 			createJLabel(seenPanel, "Seen:");
 			JTextField seenCards;
@@ -189,9 +201,10 @@ public class GameCardPanel extends JPanel{
 		frame.setVisible(true); // make it visible
 		
 		// test filling in the data
-		//Player testPlayer = new HumanPlayer("Frank", "Green", 0,0);
-		//testPlayer.updateHand(new Card("Bathroom", "Room"));
-		//testPlayer.updateSeen(new Card("Bart", "Person"));
-		//panel.updatePanels(testPlayer);
+		Player testPlayer = new HumanPlayer("Frank", "Green", 0,0);
+		testPlayer.updateHand(new Card("Bathroom", "Room"));
+		testPlayer.updateSeen(new Card("Bart", "Person"));
+		testPlayer.updateSeen(new Card("Steve", "Person"));
+		panel.updatePanels(testPlayer);
 	}
 }
