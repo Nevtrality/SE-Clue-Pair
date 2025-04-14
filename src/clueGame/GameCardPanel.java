@@ -20,6 +20,8 @@ public class GameCardPanel extends JPanel{
 	JPanel roomPanel;
 	JPanel weaponPanel;
 	
+	List<Player> playerList;
+	
 	public GameCardPanel() {
 		// set layout
 		setLayout(new GridLayout(3,0));
@@ -186,10 +188,28 @@ public class GameCardPanel extends JPanel{
 				// loop through list of cards and add to panel
 				for (Card card: seen) {
 					seenCards = new JTextField(card.getCardName());
+					Player playerWithCard = getPlayerHolding(card);
+					Color color = playerWithCard.getColor();
+					seenCards.setBackground(color);
 					seenPanel.add(seenCards);
 				}
 			}
 		return seenPanel;
+	}
+	
+	private Player getPlayerHolding(Card card) {
+		for(Player player : playerList) {
+			for(Card playerCard : player.getHand()) {
+				if(playerCard.equals(card)) {
+					return player;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void tempSetPlayerList(List<Player> players) {
+		playerList = players;
 	}
 	
 	public static void main(String[] args) {
@@ -201,10 +221,33 @@ public class GameCardPanel extends JPanel{
 		frame.setVisible(true); // make it visible
 		
 		// test filling in the data
+			// make a list of players for testing (to be changed when incorporating board players)
+		List<Player> players = new ArrayList<Player>();
+		players.add(new ComputerPlayer("Colonel Mustard", "ORANGE", 0,0));
+		players.add(new ComputerPlayer("Mrs. White", "WHITE", 0,0));
+		players.add(new ComputerPlayer("Miss Scarlet", "RED", 0,0));
+		players.add(new ComputerPlayer("Mrs Peacock", "BLUE", 0,0));
+		players.add(new ComputerPlayer("Mr Green", "GREEN", 0,0));
+		players.add(new ComputerPlayer("Professor Plum", "MAGENTA", 0,0));
+		// give players in list 1 card each
+		players.get(0).updateHand(new Card("Greenhouse", "Room"));
+		players.get(1).updateHand(new Card("Kitchen", "Room"));
+		players.get(2).updateHand(new Card("Mrs. White", "Person"));
+		players.get(3).updateHand(new Card("Mr Green", "Person"));
+		players.get(4).updateHand(new Card("Knife", "Weapon"));
+		players.get(5).updateHand(new Card("Rope", "Weapon"));
+		
+		// put cards in testPlayer's seen list
 		Player testPlayer = new HumanPlayer("Frank", "Green", 0,0);
 		testPlayer.updateHand(new Card("Bathroom", "Room"));
-		testPlayer.updateSeen(new Card("Bart", "Person"));
-		testPlayer.updateSeen(new Card("Steve", "Person"));
+		testPlayer.updateSeen(new Card("Greenhouse", "Room"));
+		testPlayer.updateSeen(new Card("Kitchen", "Room"));
+		testPlayer.updateSeen(new Card("Mrs. White", "Person"));
+		testPlayer.updateSeen(new Card("Mr Green", "Person"));
+		testPlayer.updateSeen(new Card("Knife", "Weapon"));
+		testPlayer.updateSeen(new Card("Rope", "Weapon"));
+		
+		panel.tempSetPlayerList(players);
 		panel.updatePanels(testPlayer);
 	}
 }
