@@ -8,10 +8,15 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class Board {
+public class Board extends JPanel{
 	private Set<BoardCell> targetList;
 	private Set<BoardCell> visited;
 	private BoardCell[][] grid;
@@ -41,6 +46,29 @@ public class Board {
 	public static Board getInstance() {
 		return theInstance;
 	}
+	
+	//NEW STUFF
+	// draws board and players
+	public void paintCompponent(JFrame frame, Graphics boardGraphic) {
+		// call paintComponent's super
+		super.paintComponent(boardGraphic);
+		
+		// get size of cell based on JFrame's dimensions
+			// get width of cell
+		int cellWidth = frame.getWidth() / MAX_COL_RANGE;
+			// get height of cell
+		int cellHeight = frame.getHeight() / MAX_ROW_RANGE;
+		
+		// loop through each row in grid
+		for(BoardCell[] row : grid) {
+			// loop through each cell on row
+			for(BoardCell cell : row) {
+				// call cell's draw function
+				cell.draw(boardGraphic, cellWidth, cellHeight);
+			}
+		}
+	}
+	
 	//Initiates board
 	public void initialize() {
 		try {

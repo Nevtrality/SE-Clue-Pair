@@ -1,5 +1,23 @@
-I, James Towle, certify that I participated equitably in the creation of assignment C21A-1, dated 4/10/25.
-I, Chloe Millham, certify that I participated equitably in the creation of assignment C21A-1, dated 4/10/25.
+I, James Towle, certify that I participated equitably in the creation of assignment C21A-2, dated 4/13/25.
+I, Chloe Millham, certify that I participated equitably in the creation of assignment C21A-2, dated 4/13/25.
+
+commit 1d59c346da1ee3aa65c17f36f2c34e6f96ef3b66
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sun Apr 13 18:54:24 2025 -0600
+
+    Fixed coloring for cards in seen
+
+commit 56904667547faa394c23a78309136a66c2bc64a8
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sun Apr 13 18:26:27 2025 -0600
+
+    allowed for panels to update cards when called
+
+commit 64111731a436e73a34cd813124300d938506b70f
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sun Apr 13 17:31:05 2025 -0600
+
+    Allowed panel to display skeleton layout
 
 commit 28b315e3e1031166617252fa224dcb78e50cf5b3
 Author: Nevtrality <james_towle@outlook.com>
