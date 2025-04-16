@@ -159,6 +159,9 @@ public class GameCardPanel extends JPanel{
 				for (Card card: hand) {
 					System.out.println(card.getCardName());
 					handCards = new JTextField(card.getCardName());
+					Player playerWithCard = getPlayerHolding(card);
+					Color color = playerWithCard.getColor();
+					handCards.setBackground(color);
 					handPanel.add(handCards);
 				}
 			} else {

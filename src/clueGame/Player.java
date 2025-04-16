@@ -55,6 +55,9 @@ public abstract class Player {
         case "pink":
             color = Color.pink;
             break;
+        case "white":
+        	color = Color.white;
+        	break;
         default:
             color = Color.black;
     	}

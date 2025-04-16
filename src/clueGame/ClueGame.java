@@ -20,6 +20,8 @@ import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame{
 	private static Board board;
+	private JPanel controlPanel;
+	private JPanel cardPanel;
 	public ClueGame() {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
@@ -29,11 +31,12 @@ public class ClueGame extends JFrame{
 			// draw board grid
 		add(drawBoard(), BorderLayout.CENTER);
 			// draw control panel
-		add(drawControlPanel(), BorderLayout.SOUTH);
-			// draw card panel (really smushed right now because board has no dimensions)(at least i think thats the reason)
-		JPanel card = drawCardPanel();
-		card.setPreferredSize(new Dimension(120,0));
-		add(card, BorderLayout.EAST);
+		controlPanel = drawControlPanel();
+		add(controlPanel, BorderLayout.SOUTH);
+			// draw card panel
+		cardPanel = drawCardPanel();
+		cardPanel.setPreferredSize(new Dimension(120,0));
+		add(cardPanel, BorderLayout.EAST);
 	}
 	
 	private JPanel drawBoard() {
@@ -47,11 +50,8 @@ public class ClueGame extends JFrame{
 	
 	private JPanel drawCardPanel() {
 		GameCardPanel cardPanel = new GameCardPanel();
-		for (Card card : board.getPlayers().get(0).getHand()) {
-			List<Card> newCard = new ArrayList<Card>();
-			newCard.add(card);
-			cardPanel.updateHandPanel(newCard);
-		}
+		cardPanel.tempSetPlayerList(board.getPlayers());
+		cardPanel.updatePanels(board.getPlayers().get(0));
 		return cardPanel;
 	}
 	
