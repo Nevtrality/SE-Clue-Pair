@@ -62,6 +62,7 @@ public class ClueGame extends JFrame{
 		gameFrame.setSize(900,900);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameFrame.setVisible(true);
+		gameFrame.setTitle("Clue Game");
 		// ideal board size(multiple of 28)x(multiple of 30)
 		
 		gameFrame.revalidate();
