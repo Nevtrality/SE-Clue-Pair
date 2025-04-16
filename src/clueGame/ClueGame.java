@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,9 @@ public class ClueGame extends JFrame{
 			// draw control panel
 		add(drawControlPanel(), BorderLayout.SOUTH);
 			// draw card panel (really smushed right now because board has no dimensions)(at least i think thats the reason)
-		add(drawCardPanel(), BorderLayout.EAST);
+		JPanel card = drawCardPanel();
+		card.setPreferredSize(new Dimension(120,0));
+		add(card, BorderLayout.EAST);
 	}
 	
 	private JPanel drawBoard() {
