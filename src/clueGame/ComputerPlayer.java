@@ -40,7 +40,7 @@ public class ComputerPlayer extends Player{
 		}
 		// return the solution stored in the suggestion list
 		Card currRoom = null;
-		BoardCell cell = board.getCell(row, column);
+		BoardCell cell = board.getCell(row, col);
 			String roomName = cell.getRoom().getName();
 			for(Card card : board.getDeck()) {
 				if(card.getCardName().equals(roomName)) {
@@ -52,7 +52,7 @@ public class ComputerPlayer extends Player{
 	
 	public BoardCell selectTarget(Board board, int rollNum) {
 		// calculate targets from the starting cell
-		board.calcTargets(board.getCell(row, column), rollNum);
+		board.calcTargets(board.getCell(row, col), rollNum);
 		// grab the target list
 		Set<BoardCell> targets = board.getTargets();
 		// set up random and get a random number from 0 to targets size

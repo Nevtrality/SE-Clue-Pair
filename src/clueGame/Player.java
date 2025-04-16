@@ -1,5 +1,6 @@
 package clueGame;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,21 +12,54 @@ public abstract class Player {
 	String name;
 	Color color; 
 	int row;
-	int column;
+	int col;
 	List<Card> hand = new ArrayList<Card>();
 	Set<Card> seenCards = new HashSet<Card>();
 	
-	public Player(String name, String color, int row, int column){
+	public Player(String name, String color, int row, int col){
 		this.name = name;
 		try {
 		    Field field = Color.class.getField(color);
-		    this.color = (Color)field.get(null);
+		    this.color = convertColor(color);
 		} catch (Exception e) {
-		    this.color = null; // Not defined
+			this.color = convertColor(color);
 		}
 		this.row = row;
-		this.column = column;
+		this.col = col;
 		
+	}
+	
+	 public Color convertColor(String colorStr) {
+        switch (colorStr.toLowerCase()) {
+        case "red":
+            color = Color.red;
+            break;
+        case "blue":
+            color = Color.blue;
+            break;
+        case "cyan":
+            color = Color.cyan;
+            break;
+        case "green":
+            color = Color.green;
+            break;
+        case "yellow":
+            color = Color.yellow;
+            break;
+        case "magenta":
+            color = Color.magenta;
+            break;
+        case "orange":
+            color = Color.orange;
+            break;
+        case "pink":
+            color = Color.pink;
+            break;
+        default:
+            color = Color.black;
+    	}
+        
+        return color;
 	}
 	
 	public void updateHand(Card card) {
@@ -73,6 +107,14 @@ public abstract class Player {
 	}
 	public Set<Card> getSeen(){
 		return seenCards;
+	}
+	
+	public void draw(Graphics graphics, int cellWidth, int cellHeight) {
+		int x = cellWidth * col;
+		int y = cellHeight * row;
+		graphics.setColor(color);
+		graphics.fillOval(x, y, cellWidth, cellHeight);
+		
 	}
 	
 	public abstract String getType();

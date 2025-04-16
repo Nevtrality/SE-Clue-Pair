@@ -1,5 +1,7 @@
 package clueGame;
 import java.util.Set;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.HashSet;
 
 public class Room {
@@ -49,4 +51,5 @@ public class Room {
     public Set<BoardCell> getDoorways(){
     	return doorways;
     }
+    
 }

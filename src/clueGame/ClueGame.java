@@ -21,6 +21,9 @@ import javax.swing.border.TitledBorder;
 public class ClueGame extends JFrame{
 	private static Board board;
 	public ClueGame() {
+		board = Board.getInstance();
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		board.initialize();
 		// set layout to allow center south and east bindings
 		setLayout(new BorderLayout());
 			// draw board grid
@@ -43,7 +46,13 @@ public class ClueGame extends JFrame{
 	}
 	
 	private JPanel drawCardPanel() {
-		return new GameCardPanel();
+		GameCardPanel cardPanel = new GameCardPanel();
+		for (Card card : board.getPlayers().get(0).getHand()) {
+			List<Card> newCard = new ArrayList<Card>();
+			newCard.add(card);
+			cardPanel.updateHandPanel(newCard);
+		}
+		return cardPanel;
 	}
 	
 	public static void main(String[] args) {
@@ -54,6 +63,9 @@ public class ClueGame extends JFrame{
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameFrame.setVisible(true);
 		// ideal board size(multiple of 28)x(multiple of 30)
+		
+		gameFrame.revalidate();
+		gameFrame.repaint();
 		
 	}
 	

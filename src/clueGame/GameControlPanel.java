@@ -103,6 +103,7 @@ public class GameControlPanel extends JPanel {
 	}
 
 	
+	
 	 //Main to test the panel
 	public static void main(String[] args) {
 		GameControlPanel panel = new GameControlPanel();  // create the panel

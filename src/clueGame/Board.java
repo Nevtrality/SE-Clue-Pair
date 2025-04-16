@@ -46,19 +46,19 @@ public class Board extends JPanel{
 	public static Board getInstance() {
 		return theInstance;
 	}
-	
+
 	//NEW STUFF
 	// draws board and players
-	public void paintCompponent(JFrame frame, Graphics boardGraphic) {
+	public void paintComponent(Graphics boardGraphic) {
 		// call paintComponent's super
 		super.paintComponent(boardGraphic);
-		
+
 		// get size of cell based on JFrame's dimensions
-			// get width of cell
-		int cellWidth = frame.getWidth() / MAX_COL_RANGE;
-			// get height of cell
-		int cellHeight = frame.getHeight() / MAX_ROW_RANGE;
-		
+		// get width of cell
+		int cellWidth = this.getWidth() / MAX_COL_RANGE;
+		// get height of cell
+		int cellHeight = this.getHeight() / MAX_ROW_RANGE;
+
 		// loop through each row in grid
 		for(BoardCell[] row : grid) {
 			// loop through each cell on row
@@ -67,17 +67,42 @@ public class Board extends JPanel{
 				cell.draw(boardGraphic, cellWidth, cellHeight);
 			}
 		}
+
+		//loop through players
+		for (Player player : players) {
+			//draw a player figure for each player
+			player.draw(boardGraphic, cellWidth, cellHeight);
+		}
+
+		for(Character roomChar : roomMap.keySet()) {
+			// call cell's draw function
+			if (roomChar != 'W' && roomChar != 'X') {
+				Room room = roomMap.get(roomChar);
+				BoardCell cell = room.getLabelCell();
+				cell.drawRoomName(boardGraphic, cellWidth * cell.getCol(), cellHeight * cell.getRow(), room.getName());
+
+			}
+		}
+		
+		// loop through each row in grid
+				for(BoardCell[] row : grid) {
+					// loop through each cell on row
+					for(BoardCell cell : row) {
+						// call cell's draw function
+						cell.drawDoor(boardGraphic, cellWidth, cellHeight);
+					}
+				}
+
+
+
 	}
-	
+
 	//Initiates board
 	public void initialize() {
 		try {
 			loadSetupConfig();
-			System.out.println("whoops");
 			loadLayoutConfig();
-			System.out.println("whoops");
 			deal();
-			System.out.println("whoops");
 			theInstance.createAdjList();
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();

@@ -25,6 +25,7 @@ public class GameCardPanel extends JPanel{
 	public GameCardPanel() {
 		// set layout
 		setLayout(new GridLayout(3,0));
+		this.setSize(200, 750);
 		// add border
 		setBorder(new TitledBorder(new EtchedBorder(), "Known Cards"));
 		// set layouts
@@ -140,7 +141,7 @@ public class GameCardPanel extends JPanel{
 		weaponPanel.revalidate();
 	}
 	
-	private JPanel updateHandPanel(List<Card> hand) {
+	JPanel updateHandPanel(List<Card> hand) {
 		JPanel handPanel = new JPanel();
 		// formatting layout
 		if(hand.size()<1) {
