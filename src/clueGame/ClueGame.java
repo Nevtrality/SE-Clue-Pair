@@ -2,6 +2,7 @@ package clueGame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -58,6 +59,7 @@ public class ClueGame extends JFrame{
 	public static void main(String[] args) {
 		// initialize game's frame
 		ClueGame gameFrame = new ClueGame();
+		JOptionPane.showMessageDialog(null, "<html><center>You are House<center><html>\n"+"<html><center>Figure out how the patient<center><html>\n"+"<html><center>died before your stupid collegues<center><html>", "Welcome to House",JOptionPane.INFORMATION_MESSAGE);
 		// set default game frame size
 		gameFrame.setSize(900,900);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
