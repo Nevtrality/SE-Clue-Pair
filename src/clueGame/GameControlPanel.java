@@ -159,6 +159,7 @@ public class GameControlPanel extends JPanel {
 				//flag unfinished (what?)
 			}
 		// end
+			board.repaint();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
