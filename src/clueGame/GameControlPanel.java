@@ -7,6 +7,11 @@ import clueGame.CardType;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Set;
+import java.awt.Graphics;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -19,10 +24,12 @@ public class GameControlPanel extends JPanel {
 	private JTextField rollIndicator;
 	private JTextField inputtedGuess;
 	private JTextField guessResult;
+	private JButton makeAccusation;
+	private JButton nextTurn;
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
-	public GameControlPanel()  {
+	public GameControlPanel(Board board)  {
 		// contains outer 2 panels
 		setLayout(new GridLayout(2,0)); // create a 2x0 layout
 		
@@ -51,13 +58,26 @@ public class GameControlPanel extends JPanel {
 				// contains make accusation button
 				innerPanel = new JPanel();
 				innerPanel.setLayout(new GridLayout(1,0));
-					JButton makeAccusation = new JButton("Make Accusation");
+					makeAccusation = new JButton("Make Accusation");
+					
+					// makeAccusation button listener
+					
 					innerPanel.add(makeAccusation);
 			panel.add(innerPanel);
 				// contains next turn button
 				innerPanel = new JPanel();
 				innerPanel.setLayout(new GridLayout(1,0));
-					JButton nextTurn = new JButton("NEXT!");
+					nextTurn = new JButton("NEXT!");
+					
+					// nextTurn button listener
+					nextTurn.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent click) {
+							handleNextButton(board);
+						}
+						
+					});
+					
 					innerPanel.add(nextTurn);
 			panel.add(innerPanel);
 			
@@ -80,6 +100,10 @@ public class GameControlPanel extends JPanel {
 					innerPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
 			panel.add(innerPanel);
 		add(panel);
+		
+		// start player's turn
+		handleNextButton(board);
+		
 	}
 	
 	private void createJLabel(JPanel currentPanel, String labelText) {
@@ -95,18 +119,54 @@ public class GameControlPanel extends JPanel {
 		guessResult.setText(result);
 	}
 	
-	public void setTurn(ComputerPlayer cpu, int roll) {
-		turnIndicator.setText(cpu.getName()); 
-		Color color = cpu.getColor();
+	public void setTurn(Player player, int roll) {
+		turnIndicator.setText(player.getName()); 
+		Color color = player.getColor();
 		turnIndicator.setBackground(color);
 		rollIndicator.setText(String.valueOf(roll));
 	}
-
 	
+	public void handleNextButton(Board board) {
+		try {
+			// update player functions
+			int roll = board.updatePlayer();
+			Player currentPlayer = board.getCurrentPlayer();
+			// update control panel
+			setTurn(currentPlayer, roll);
+			
+			// check if player is human
+			if(board.getCurrentPlayer().getType() == "Computer"){	// no
+				// accusation?
+				
+				// move
+				BoardCell playerTargetCell = currentPlayer.selectTarget(board, roll);
+					// move player's sprite to that cell
+				currentPlayer.updatePosition(playerTargetCell);
+
+				
+				// suggestion?
+				if(playerTargetCell.isRoom()) {
+					currentPlayer.createSuggestion(board);
+				}
+			}else {	// yes
+				//display targets
+				board.calcTargets(board.getCell(currentPlayer.row, currentPlayer.col), roll);
+				Set<BoardCell> targets = board.getTargets();
+					// loop through target list, change each cell/s color
+				for(BoardCell cell : targets) {
+					cell.updateColor(Color.lightGray);
+				}
+				//flag unfinished (what?)
+			}
+		// end
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+	}
 	
 	 //Main to test the panel
 	public static void main(String[] args) {
-		GameControlPanel panel = new GameControlPanel();  // create the panel
+		GameControlPanel panel = new GameControlPanel(Board.getInstance());  // create the panel
 		JFrame frame = new JFrame();  // create the frame 
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(750, 180);  // size the frame

@@ -73,6 +73,11 @@ public abstract class Player {
 		seenCards.add(seenCard);
 	}
 	
+	public void updatePosition(BoardCell cell) {
+		this.row = cell.getRow();
+		this.col = cell.getCol();
+	}
+	
 	public Card disproveSuggestion(Solution suggestion) {
 		List<Card> matchingCards = new ArrayList<Card>();
 		// check if player holds a suggested card
@@ -98,6 +103,10 @@ public abstract class Player {
 		return name;
 	}
 
+	public boolean isFinished(){
+		return true;
+	}
+
 	public Color getColor() {
 		return color;
 	}
@@ -119,6 +128,7 @@ public abstract class Player {
 		graphics.fillOval(x, y, cellWidth, cellHeight);
 		
 	}
+	
 	
 	public abstract String getType();
 

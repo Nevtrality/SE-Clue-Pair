@@ -46,7 +46,7 @@ public class ClueGame extends JFrame{
 	}
 	
 	private JPanel drawControlPanel() {
-		return new GameControlPanel();
+		return new GameControlPanel(board);
 	}
 	
 	private JPanel drawCardPanel() {

@@ -15,6 +15,9 @@ public class BoardCell {
 
 	// List of adjacent cells
 	private Set<BoardCell> adjList;
+	
+	// cell's color
+	private Color cellColor = Color.blue;
 
 
 	public BoardCell(int row, int column){
@@ -77,6 +80,7 @@ public class BoardCell {
 			isRoom = true;
 			// label cell
 			roomLabel = true;
+			this.cellColor = Color.magenta;
 			room.setLabelCell(this);
 			break;
 		case '*':
@@ -84,36 +88,42 @@ public class BoardCell {
 			isRoom = true;
 			// center cell
 			roomCenter = true;
+			this.cellColor = Color.magenta;
 			room.setCenterCell(this);
 			break;
 		case '^':
 			isRoom = false;
 			// door up cell
 			isDoorway = true;
+			this.cellColor = Color.yellow;
 			doorDirection = DoorDirection.UP;
 			break;
 		case '>':
 			isRoom = false;
 			// door right cell
 			isDoorway = true;
+			this.cellColor = Color.yellow;
 			doorDirection = DoorDirection.RIGHT;
 			break;
 		case 'v':
 			isRoom = false;
 			// door down cell
 			isDoorway = true;
+			this.cellColor = Color.yellow;
 			doorDirection = DoorDirection.DOWN;
 			break;
 		case'<':
 			isRoom = false;
 			// door left cell
 			isDoorway = true;
+			this.cellColor = Color.yellow;
 			doorDirection = DoorDirection.LEFT;
 			break;
 		default:
 			isRoom = true;
 			//secret passage
 			secretPassage = type;
+			this.cellColor = Color.red;
 			room.setSecretPassage(this);
 
 		}
@@ -142,20 +152,8 @@ public class BoardCell {
 	}
 
 	public void draw(Graphics graphics, int cellWidth, int cellHeight) {
-
-
-		if(isDoorway) {
-			graphics.setColor(Color.yellow);
-		}
-		else if (secretPassage != '\0') {
-			graphics.setColor(Color.red);
-		}
-		else if(isRoom()) {
-			graphics.setColor(Color.magenta);
-		}
-		else {
-			graphics.setColor(Color.blue);
-		}
+		
+		graphics.setColor(cellColor);
 
 		int x = col * cellWidth;
 		int y = row * cellHeight;
@@ -175,6 +173,29 @@ public class BoardCell {
 		graphics.drawString(roomName, cellWidth, cellHeight);
 	}
 
+	public void updateColor(Color color) {
+		this.cellColor = color;
+	}
+	
+	public void resetColor() {
+		// reset room cell color
+		if(secretPassage != '\0'){
+			cellColor = Color.red;
+		}
+		else if (isRoom) {
+			cellColor = Color.magenta;
+		}
+		else if(isDoorway){
+			cellColor = Color.yellow;
+		}
+		else if(unused) {
+			cellColor = Color.black;
+		}
+		else {
+			cellColor = Color.blue;
+		}
+	}
+
 	public int getRow(){
 		return row;
 	}
@@ -185,6 +206,7 @@ public class BoardCell {
 
 	public void setRoom(boolean room){
 		this.isRoom = true;
+		cellColor = Color.magenta;
 	}
 
 	public boolean isRoom(){
@@ -237,6 +259,7 @@ public class BoardCell {
 
 	public void setUnused(boolean unused) {
 		this.unused = unused;
+		cellColor = Color.black;
 	}
 
 	public boolean getUnused() {

@@ -30,6 +30,10 @@ public class Board extends JPanel{
 	String setupConfigFile;
 	Solution solution;
 	Map<Character, Room> roomMap; // stores room name and character
+	
+	// active game variables
+	private Player currentPlayer;
+	private int currentPlayerIndex = 5;
 
 
 	// Max range for calcTargets range
@@ -104,6 +108,7 @@ public class Board extends JPanel{
 			loadLayoutConfig();
 			deal();
 			theInstance.createAdjList();
+			currentPlayer = players.get(currentPlayerIndex);
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();
 		}
@@ -293,6 +298,30 @@ public class Board extends JPanel{
 		// No players could disprove, so return null
 		return null;
 	}
+	
+	// handle function of next button so code is cleaner
+	public int updatePlayer() throws Exception{
+		// check if human player is finished
+		if(currentPlayer.isFinished()) {	// yes->proceed
+			// change player to next in list
+			currentPlayerIndex = (currentPlayerIndex+1)%6; // update index and allow looping to start of list
+			currentPlayer = players.get(currentPlayerIndex);
+			
+			// roll dice
+			Random rand = new Random();
+			int diceRoll = rand.nextInt(1,7);
+			// calc targets
+			calcTargets(getCell(currentPlayer.row, currentPlayer.col), diceRoll);
+			return diceRoll;
+		} else {	// no->error
+			throw new Exception("Player isn't finished");
+		}
+	}
+	
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+	
 
 	//create get functions
 	public int getNumRows() {
