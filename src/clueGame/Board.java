@@ -339,7 +339,6 @@ public class Board extends JPanel implements MouseListener{
 	public void mouseClicked(MouseEvent click) {
 		int clickedCellCol = click.getX()/cellWidth;
 		int clickedCellRow = click.getY()/cellHeight;
-		System.out.println(clickedCellRow + " " + clickedCellCol + " " + targetList.size());
 		// check if cell clicked is in target cell list
 		BoardCell clickedCell = getCell(clickedCellRow,clickedCellCol);
 		if(targetList.contains(clickedCell)) {
@@ -350,8 +349,9 @@ public class Board extends JPanel implements MouseListener{
 			}
 			targetList.clear();
 			currentPlayer.setTurnStatus(true);
-			System.out.println("ran");
 			repaint();
+		} else {
+			System.err.println("Invalid target cell selected");
 		}
 	}
 	@Override
@@ -489,7 +489,6 @@ public class Board extends JPanel implements MouseListener{
 			Card card = tempdeck.get(num);
 			while(card==null) {
 				num = rand.nextInt(0,21);
-				System.out.println(num);
 				card = tempdeck.get(num);
 			}
 			players.get(i%6).updateHand(card);

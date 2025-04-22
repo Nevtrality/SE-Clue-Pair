@@ -154,10 +154,8 @@ public class GameCardPanel extends JPanel{
 			JTextField handCards = new JTextField();
 			// if the list is empty, return a single text field with "None"
 			if(hand.size() > 0) {
-				System.out.println("ran");
 				// loop through list of cards and add to panel
 				for (Card card: hand) {
-					System.out.println(card.getCardName());
 					handCards = new JTextField(card.getCardName());
 					Player playerWithCard = getPlayerHolding(card);
 					Color color = playerWithCard.getColor();
