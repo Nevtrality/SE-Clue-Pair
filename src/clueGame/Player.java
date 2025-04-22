@@ -15,6 +15,7 @@ public abstract class Player {
 	int col;
 	List<Card> hand = new ArrayList<Card>();
 	Set<Card> seenCards = new HashSet<Card>();
+	boolean turnFinished = false;
 	
 	public Player(String name, String color, int row, int col){
 		this.name = name;
@@ -76,6 +77,7 @@ public abstract class Player {
 	public void updatePosition(BoardCell cell) {
 		this.row = cell.getRow();
 		this.col = cell.getCol();
+		turnFinished = true;
 	}
 	
 	public Card disproveSuggestion(Solution suggestion) {
@@ -104,7 +106,11 @@ public abstract class Player {
 	}
 
 	public boolean isFinished(){
-		return true;
+		return turnFinished;
+	}
+	
+	public void setTurnStatus(boolean status) {
+		turnFinished = status;
 	}
 
 	public Color getColor() {

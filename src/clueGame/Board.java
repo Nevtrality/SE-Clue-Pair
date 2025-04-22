@@ -13,10 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class Board extends JPanel{
+public class Board extends JPanel implements MouseListener{
 	private Set<BoardCell> targetList;
 	private Set<BoardCell> visited;
 	private BoardCell[][] grid;
@@ -34,6 +36,9 @@ public class Board extends JPanel{
 	// active game variables
 	private Player currentPlayer;
 	private int currentPlayerIndex = 5;
+	private int cellWidth;
+	private int cellHeight;
+	private boolean startOfGame = true;
 
 
 	// Max range for calcTargets range
@@ -45,6 +50,7 @@ public class Board extends JPanel{
 	//constructor private to ensure only 1 created
 	private Board() {
 		super();
+		addMouseListener(this);
 	}
 	// method returns only board
 	public static Board getInstance() {
@@ -59,9 +65,9 @@ public class Board extends JPanel{
 
 		// get size of cell based on JFrame's dimensions
 		// get width of cell
-		int cellWidth = this.getWidth() / MAX_COL_RANGE;
+		cellWidth = this.getWidth() / MAX_COL_RANGE;
 		// get height of cell
-		int cellHeight = this.getHeight() / MAX_ROW_RANGE;
+		cellHeight = this.getHeight() / MAX_ROW_RANGE;
 
 		// loop through each row in grid
 		for(BoardCell[] row : grid) {
@@ -301,11 +307,16 @@ public class Board extends JPanel{
 	
 	// handle function of next button so code is cleaner
 	public int updatePlayer() throws Exception{
+		if(startOfGame) {
+			currentPlayer.setTurnStatus(true);
+			startOfGame = false;
+		}
 		// check if human player is finished
 		if(currentPlayer.isFinished()) {	// yes->proceed
 			// change player to next in list
 			currentPlayerIndex = (currentPlayerIndex+1)%6; // update index and allow looping to start of list
 			currentPlayer = players.get(currentPlayerIndex);
+			currentPlayer.setTurnStatus(false); // set finished turn to false
 			
 			// roll dice
 			Random rand = new Random();
@@ -320,6 +331,44 @@ public class Board extends JPanel{
 	
 	public Player getCurrentPlayer() {
 		return currentPlayer;
+	}
+	
+	
+	// mouse listener for board
+	@Override
+	public void mouseClicked(MouseEvent click) {
+		int clickedCellCol = click.getX()/cellWidth;
+		int clickedCellRow = click.getY()/cellHeight;
+		System.out.println(clickedCellRow + " " + clickedCellCol + " " + targetList.size());
+		// check if cell clicked is in target cell list
+		BoardCell clickedCell = getCell(clickedCellRow,clickedCellCol);
+		if(targetList.contains(clickedCell)) {
+			currentPlayer.updatePosition(clickedCell);
+			// reset all target cell colors
+			for(BoardCell cell : targetList) {
+				cell.resetColor();
+			}
+			targetList.clear();
+			currentPlayer.setTurnStatus(true);
+			System.out.println("ran");
+			repaint();
+		}
+	}
+	@Override
+	public void mousePressed(MouseEvent press) {
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent release) {
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent enter) {
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent exit) {
+		
 	}
 	
 
