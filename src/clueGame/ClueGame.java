@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 
+
 public class ClueGame extends JFrame{
 	private static Board board;
 	private JPanel controlPanel;
