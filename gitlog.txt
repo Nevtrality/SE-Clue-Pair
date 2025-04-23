@@ -1,5 +1,65 @@
-I, James Towle, certify that I participated equitably in the creation of assignment C21A-2, dated 4/13/25.
-I, Chloe Millham, certify that I participated equitably in the creation of assignment C21A-2, dated 4/13/25.
+I, James Towle, certify that I participated equitably in the creation of assignment C23A, dated 4/21/25.
+I, Chloe Millham, certify that I participated equitably in the creation of assignment C23A, dated 4/21/25.
+
+commit d6af4bd7d244639a011aa3d8dc39b7aba96c0992
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Mon Apr 21 19:29:47 2025 -0600
+
+    cleaned up console and added error message for invalid target selection
+
+commit 9f8b286bdaea13b9bec3525f531776bbbb0c358a
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Mon Apr 21 19:25:40 2025 -0600
+
+    player can now move around board
+
+commit 7db9fafc8ea975f1f2d65cb94c304a29309cf35a
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Mon Apr 21 18:42:43 2025 -0600
+
+    computer players move
+
+commit 91916378b0ec479086cb9576732358caa448d4cd
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Mon Apr 21 18:38:44 2025 -0600
+
+    next button cycles through players
+
+commit c54cd22bcc822d236c0ebe1bad4a7bc83e4bd19f
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Mon Apr 21 16:33:20 2025 -0600
+
+    added splash screen
+
+commit a24f2319e568103ceeafa8933e7832e375f64a0b
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Apr 15 23:41:11 2025 -0600
+
+    show player's cards on screen, slightly adjusted coloring
+
+commit 0bb48bf30d842c25a080e329fc3ea8b258067fe8
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 15 22:42:28 2025 -0600
+
+    JFrame has title
+
+commit da7a6cbf5c6ac52b6712a1638c4f484a889e02bd
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 15 22:38:02 2025 -0600
+
+    Draws board cells, draws room names, draws players, draws walkways
+
+commit a770ab8f4c8c80656029f552ae095964805276f1
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Apr 15 19:58:37 2025 -0600
+
+    fixed smushing
+
+commit 426cfb5caae541d58710bb831a6f7051bd399bbf
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Apr 15 16:42:46 2025 -0600
+
+    Created ClueGame class, made paintComponent function in Board, drew board space control and card panels onto frame
 
 commit 1d59c346da1ee3aa65c17f36f2c34e6f96ef3b66
 Author: Nevtrality <james_towle@outlook.com>

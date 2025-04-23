@@ -1,0 +1,8 @@
+(ComputerPlayer.java) Remove unused imports
+(ClueGame.java) Remove unused imports
+(Board.java) Remove unused imports
+(Board.java)[137,138] Use or remove unused variables (preferably use)
+(Board.java) Move around functions to make file easier to navigate
+(GameCardPanel.java) Remove unused imports
+(GameCardPanel.java) Add comments to make constructor more intuitive
+(Player.java)[23] Remove unused variable

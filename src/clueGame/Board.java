@@ -164,6 +164,8 @@ public class Board extends JPanel implements MouseListener{
 					}
 				}
 			}
+			DECKSIZE = countDeck;
+			PLAYERCOUNT = countPlayer;
 			reader.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Error occurred when reading setup file");
