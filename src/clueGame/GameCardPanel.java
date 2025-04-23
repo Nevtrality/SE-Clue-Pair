@@ -22,7 +22,7 @@ public class GameCardPanel extends JPanel{
 	List<Player> playerList;
 	
 	public GameCardPanel() {
-		// set layout
+		// set layout dimensions
 		setLayout(new GridLayout(3,0));
 		this.setSize(200, 750);
 		// add border
@@ -33,9 +33,9 @@ public class GameCardPanel extends JPanel{
 				playerPanel.setLayout(new GridLayout(2,0));
 					// add border
 					playerPanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
-					// update hand panel
+					// update hand panel to have field for the Player's "people" card
 					playerPanel.add(updateHandPanel(new ArrayList<Card>()));
-					// update seen panel
+					// update seen panel to have field for the seen "people"
 					playerPanel.add(updateSeenPanel(new ArrayList<Card>()));
 				
 				add(playerPanel);
@@ -45,9 +45,9 @@ public class GameCardPanel extends JPanel{
 				roomPanel.setLayout(new GridLayout(2,0));
 					// add border
 					roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-					// update hand panel
+					// update hand panel to have field for the Player's "room" card
 					roomPanel.add(updateHandPanel(new ArrayList<Card>()));
-					// update seen panel
+					// update seen panel to have field for the seen "rooms"
 					roomPanel.add(updateSeenPanel(new ArrayList<Card>()));
 				
 				add(roomPanel);
@@ -57,9 +57,9 @@ public class GameCardPanel extends JPanel{
 				weaponPanel.setLayout(new GridLayout(2,0));
 					// add border
 					weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
-					// update hand panel
+					// update hand panel to have field for the Player's "weapon" card
 					weaponPanel.add(updateHandPanel(new ArrayList<Card>()));
-					// update seen panel
+					// update seen panel to have field for the seen "weapons"
 					weaponPanel.add(updateSeenPanel(new ArrayList<Card>()));
 				
 				add(weaponPanel);
@@ -108,9 +108,9 @@ public class GameCardPanel extends JPanel{
 		playerPanel.setLayout(new GridLayout(2,0));
 			// add border
 			playerPanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
-			// update hand panel
+			// update hand panel to show value of the player's "people" card
 			playerPanel.add(updateHandPanel(handPerson));
-			// update seen panel
+			// update seen panel to have value of the player's "people" card as a seen value
 			playerPanel.add(updateSeenPanel(seenPerson));
 		
 		playerPanel.revalidate();
@@ -120,9 +120,9 @@ public class GameCardPanel extends JPanel{
 		roomPanel.setLayout(new GridLayout(2,0));
 			// add border
 			roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-			// update hand panel
+			// update hand panel to show value of the player's "room" card
 			roomPanel.add(updateHandPanel(handRoom));
-			// update seen panel
+			// update seen panel to have value of the player's "room" card as a seen value
 			roomPanel.add(updateSeenPanel(seenRoom));
 		
 		roomPanel.revalidate();
@@ -132,9 +132,9 @@ public class GameCardPanel extends JPanel{
 		weaponPanel.setLayout(new GridLayout(2,0));
 			// add border
 			weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
-			// update hand panel
+			// update hand panel to show value of the player's "weapon" card
 			weaponPanel.add(updateHandPanel(handWeapon));
-			// update seen panel
+			// update seen panel to have value of the player's "weapon" card as a seen value
 			weaponPanel.add(updateSeenPanel(seenWeapon));
 		
 		weaponPanel.revalidate();
@@ -162,6 +162,7 @@ public class GameCardPanel extends JPanel{
 					handPanel.add(handCards);
 				}
 			} else {
+				//if no new seen cards, set text field to say none
 				handCards = new JTextField();
 				handCards.setText("None");
 				handPanel.add(handCards);
