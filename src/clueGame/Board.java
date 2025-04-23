@@ -56,7 +56,7 @@ public class Board extends JPanel implements MouseListener{
 		return theInstance;
 	}
 
-	//NEW STUFF
+////////////////////////////////////// BOARD DRAWING //////////////////////////////////////////////////////////
 	// draws board and players
 	public void paintComponent(Graphics boardGraphic) {
 		// call paintComponent's super
@@ -105,6 +105,8 @@ public class Board extends JPanel implements MouseListener{
 
 
 	}
+	
+////////////////////////////////////// INITIAL FILE READING AND SETUP //////////////////////////////////////////////////////////
 
 	//Initiates board
 	public void initialize() {
@@ -276,6 +278,8 @@ public class Board extends JPanel implements MouseListener{
 			e.printStackTrace();
 		}
 	}
+	
+////////////////////////////////////// PLAYER CARD ACTION HANDLING //////////////////////////////////////////////////////////
 
 	public boolean checkAccusation(Solution accusation) {
 		// if room = solution.room, person = solution.person, and weapon = solution.weapon
@@ -305,6 +309,8 @@ public class Board extends JPanel implements MouseListener{
 		// No players could disprove, so return null
 		return null;
 	}
+
+////////////////////////////////////// PLAYER BUTTON ACTION HANDLING //////////////////////////////////////////////////////////
 	
 	// handle function of next button so code is cleaner
 	public int updatePlayer() throws Exception{
@@ -330,10 +336,7 @@ public class Board extends JPanel implements MouseListener{
 		}
 	}
 	
-	public Player getCurrentPlayer() {
-		return currentPlayer;
-	}
-	
+////////////////////////////////////// MOUSE LISTENER FOR BOARD //////////////////////////////////////////////////////////
 	
 	// mouse listener for board
 	@Override
@@ -372,35 +375,7 @@ public class Board extends JPanel implements MouseListener{
 		
 	}
 	
-
-	//create get functions
-	public int getNumRows() {
-		return MAX_ROW_RANGE;
-	}
-
-	public int getNumColumns() {
-		return MAX_COL_RANGE;
-	}
-
-	public List<Player> getPlayers() {
-		return players;
-	}
-
-	public List<Card> getDeck(){
-		return deck;
-	}
-
-	public Solution getSolution(){
-		return solution;
-	}
-
-	public Room getRoom(char letter) {
-		return roomMap.get(letter);
-	}
-
-	public Room getRoom(BoardCell cell) {
-		return cell.getRoom();
-	}
+////////////////////////////////////// PLAYER MOVEMENT CALCULATION //////////////////////////////////////////////////////////
 
 	public void calcTargets(BoardCell startCell, int pathlength){
 		// reset targetList
@@ -431,7 +406,6 @@ public class Board extends JPanel implements MouseListener{
 		}
 	}
 
-
 	// make adjacency list for the board of cells
 	private void createAdjList(){
 		for (int row = 0; row < MAX_ROW_RANGE; row++){
@@ -451,21 +425,8 @@ public class Board extends JPanel implements MouseListener{
 			}
 		}
 	}
-
-	public Set<BoardCell> getAdjList(int row, int col){
-		// return adjacency list for current position in grid
-		return grid[row][col].getAdjList();
-	}
-
-	public BoardCell getCell(int row, int col){
-		// return cell at specified position
-		return grid[row][col];
-	}
-
-	public Set<BoardCell> getTargets(){
-		// return set/list created by calcTargets
-		return targetList;
-	}
+	
+////////////////////////////////////// CARD DECK HANDLING //////////////////////////////////////////////////////////
 
 	public void deal() {
 		if(deck.size() < 10) {
@@ -496,5 +457,57 @@ public class Board extends JPanel implements MouseListener{
 			tempdeck.remove(num);
 		}
 	}
+	
+//////////////////////////////////////ALL GETTER FUNCTIONS //////////////////////////////////////////////////////////
+
+	//General get functions
+	public int getNumRows() {
+		return MAX_ROW_RANGE;
+	}
+	
+	public int getNumColumns() {
+		return MAX_COL_RANGE;
+	}
+	
+	public List<Player> getPlayers() {
+		return players;
+	}
+	
+	public List<Card> getDeck(){
+		return deck;
+	}
+	
+	public Solution getSolution(){
+		return solution;
+	}
+	
+	public Room getRoom(char letter) {
+		return roomMap.get(letter);
+	}
+	
+	public Room getRoom(BoardCell cell) {
+		return cell.getRoom();
+	}
+	
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+	
+	// Movement based get functions
+	public Set<BoardCell> getAdjList(int row, int col){
+		// return adjacency list for current position in grid
+		return grid[row][col].getAdjList();
+	}
+
+	public BoardCell getCell(int row, int col){
+		// return cell at specified position
+		return grid[row][col];
+	}
+
+	public Set<BoardCell> getTargets(){
+		// return set/list created by calcTargets
+		return targetList;
+	}
 
 }
+
