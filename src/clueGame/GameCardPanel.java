@@ -151,11 +151,13 @@ public class GameCardPanel extends JPanel{
 			// create label
 			createJLabel(handPanel, "In Hand:");
 			JTextField handCards = new JTextField();
+			handCards.setEditable(false);
 			// if the list is empty, return a single text field with "None"
 			if(hand.size() > 0) {
 				// loop through list of cards and add to panel
 				for (Card card: hand) {
 					handCards = new JTextField(card.getCardName());
+					handCards.setEditable(false);
 					Player playerWithCard = getPlayerHolding(card);
 					Color color = playerWithCard.getColor();
 					handCards.setBackground(color);
@@ -165,6 +167,7 @@ public class GameCardPanel extends JPanel{
 				//if no new seen cards, set text field to say none
 				handCards = new JTextField();
 				handCards.setText("None");
+				handCards.setEditable(false);
 				handPanel.add(handCards);
 			}
 		return handPanel;
@@ -185,11 +188,13 @@ public class GameCardPanel extends JPanel{
 			if(seen.size() == 0) {
 				seenCards = new JTextField();
 				seenCards.setText("None");
+				seenCards.setEditable(false);
 				seenPanel.add(seenCards);
 			} else {
 				// loop through list of cards and add to panel
 				for (Card card: seen) {
 					seenCards = new JTextField(card.getCardName());
+					seenCards.setEditable(false);
 					Player playerWithCard = getPlayerHolding(card);
 					Color color = playerWithCard.getColor();
 					seenCards.setBackground(color);
