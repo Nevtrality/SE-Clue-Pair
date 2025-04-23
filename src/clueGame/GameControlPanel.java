@@ -61,7 +61,6 @@ public class GameControlPanel extends JPanel {
 					makeAccusation = new JButton("Make Accusation");
 					
 					// makeAccusation button listener
-					
 					innerPanel.add(makeAccusation);
 			panel.add(innerPanel);
 				// contains next turn button

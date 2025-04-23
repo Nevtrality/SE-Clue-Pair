@@ -20,7 +20,6 @@ public abstract class Player {
 	public Player(String name, String color, int row, int col){
 		this.name = name;
 		try {
-		    Field field = Color.class.getField(color);
 		    this.color = convertColor(color);
 		} catch (Exception e) {
 			this.color = convertColor(color);
