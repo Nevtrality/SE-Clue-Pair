@@ -1,5 +1,184 @@
-I, James Towle, certify that I participated equitably in the creation of assignment C23A, dated 4/21/25.
-I, Chloe Millham, certify that I participated equitably in the creation of assignment C23A, dated 4/21/25.
+BEFORE:
+	
+	public void deal() {
+		if(deck.size() < 10) {
+			return;
+		}
+		Random rand = new Random();
+		// deal deck to solution
+		List<Card> tempdeck = new ArrayList<Card>();
+		for(Card card : deck) {
+			tempdeck.add(card);
+		}
+		int roomLoc = rand.nextInt(0,9);
+		int personLoc = rand.nextInt(9,15);
+		int weaponLoc = rand.nextInt(15,21);
+		solution = new Solution(deck.get(roomLoc), deck.get(personLoc), deck.get(weaponLoc));
+		tempdeck.remove(roomLoc);
+		tempdeck.remove(personLoc-1);
+		tempdeck.remove(weaponLoc-2);
+		// deal deck to players
+		for(int i = DECKSIZE - 3; i > 0; i--) {
+			int num = rand.nextInt(0,i);
+			Card card = tempdeck.get(num);
+			while(card==null) {
+				num = rand.nextInt(0,21);
+				card = tempdeck.get(num);
+			}
+			players.get(i%6).updateHand(card);
+			tempdeck.remove(num);
+		}
+	}
+
+}
+
+
+AFTER:
+
+////////////////////////////////////// CARD DECK HANDLING //////////////////////////////////////////////////////////
+
+	public void deal() {
+		if(deck.size() < 10) {
+			return;
+		}
+		Random rand = new Random();
+		// deal deck to solution
+		List<Card> tempdeck = new ArrayList<Card>();
+		for(Card card : deck) {
+			tempdeck.add(card);
+		}
+		int roomLoc = rand.nextInt(0,9);
+		int personLoc = rand.nextInt(9,15);
+		int weaponLoc = rand.nextInt(15,21);
+		solution = new Solution(deck.get(roomLoc), deck.get(personLoc), deck.get(weaponLoc));
+		tempdeck.remove(roomLoc);
+		tempdeck.remove(personLoc-1);
+		tempdeck.remove(weaponLoc-2);
+		// deal deck to players
+		for(int i = DECKSIZE - 3; i > 0; i--) {
+			int num = rand.nextInt(0,i);
+			Card card = tempdeck.get(num);
+			while(card==null) {
+				num = rand.nextInt(0,21);
+				card = tempdeck.get(num);
+			}
+			players.get(i%6).updateHand(card);
+			tempdeck.remove(num);
+		}
+	}
+	
+//////////////////////////////////////ALL GETTER FUNCTIONS //////////////////////////////////////////////////////////
+
+	//General get functions
+	public int getNumRows() {
+		return MAX_ROW_RANGE;
+	}
+	
+	public int getNumColumns() {
+		return MAX_COL_RANGE;
+	}
+	
+	public List<Player> getPlayers() {
+		return players;
+	}
+	
+	public List<Card> getDeck(){
+		return deck;
+	}
+	
+	public Solution getSolution(){
+		return solution;
+	}
+	
+	public Room getRoom(char letter) {
+		return roomMap.get(letter);
+	}
+	
+	public Room getRoom(BoardCell cell) {
+		return cell.getRoom();
+	}
+	
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+	
+	// Movement based get functions
+	public Set<BoardCell> getAdjList(int row, int col){
+		// return adjacency list for current position in grid
+		return grid[row][col].getAdjList();
+	}
+
+	public BoardCell getCell(int row, int col){
+		// return cell at specified position
+		return grid[row][col];
+	}
+
+	public Set<BoardCell> getTargets(){
+		// return set/list created by calcTargets
+		return targetList;
+	}
+
+}
+
+commit 4164fab6407813fc81a7f38b356b004c38dae8bd
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Wed Apr 23 15:30:51 2025 -0600
+
+    removed unused string symbols in DoorDirection.java
+
+commit 0e93240b2c3434f726625d615f5e450747b5f00e
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Wed Apr 23 15:25:18 2025 -0600
+
+    removed more unused imports
+
+commit af870b7adf2790004c1ea1601a3139461d70253e
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Wed Apr 23 15:16:33 2025 -0600
+
+    re-organized Board.java and added comments to make file easier to read and go through
+
+commit 9f7c504a9dc6a63e7398d23794b61df68656438d
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Wed Apr 23 15:02:43 2025 -0600
+
+    used unused variables in Board.java to make player count and deck size flexible
+
+commit 4c54f323c33ce5dedaf8b2c836dbeec6d560d9ad
+Author: cMillham <chloemillham@gmail.com>
+Date:   Wed Apr 23 14:32:47 2025 -0600
+
+    added comments to GameCardPanel to make it more understandable
+
+commit fd829f9f8f177b348d6b7459c1d9417994801e9f
+Author: cMillham <chloemillham@gmail.com>
+Date:   Wed Apr 23 14:21:23 2025 -0600
+
+    Removed all unused variables
+
+commit a4ccc669dd8b1b411b0be5c00e8cbe54a0499c7b
+Author: cMillham <chloemillham@gmail.com>
+Date:   Wed Apr 23 14:15:37 2025 -0600
+
+    oops
+
+commit 0a2ab46b735a058d790a6661602cbfb455700e02
+Author: cMillham <chloemillham@gmail.com>
+Date:   Wed Apr 23 14:11:19 2025 -0600
+
+    Removed all unused imports
+
+commit 3aad9427a9991282256cda09556f817104d1a6e5
+Author: cMillham <chloemillham@gmail.com>
+Date:   Wed Apr 23 14:09:08 2025 -0600
+
+    forgot to branch
+
+commit 856eab9ec14a5a82faeed65bc44736042775ff66
+Author: cMillham <chloemillham@gmail.com>
+Date:   Wed Apr 23 14:05:53 2025 -0600
+
+    removed all unused imports from ComputerPlayer, ClueGame, Board, and GameCardPanel
 
 commit d6af4bd7d244639a011aa3d8dc39b7aba96c0992
 Author: Nevtrality <james_towle@outlook.com>

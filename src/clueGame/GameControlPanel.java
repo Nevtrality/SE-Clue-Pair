@@ -22,10 +22,12 @@ public class GameControlPanel extends JPanel {
 	private JTextField guessResult;
 	private JButton makeAccusation;
 	private JButton nextTurn;
+	Board board;
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
 	public GameControlPanel(Board board)  {
+		this.board = board;
 		// contains outer 2 panels
 		setLayout(new GridLayout(2,0)); // create a 2x0 layout
 		
@@ -98,7 +100,7 @@ public class GameControlPanel extends JPanel {
 		
 		// start player's turn
 		handleNextButton(board);
-		
+		board.setControlPanel(this);
 	}
 	
 	private void createJLabel(JPanel currentPanel, String labelText) {
@@ -108,10 +110,14 @@ public class GameControlPanel extends JPanel {
 	
 	public void setGuess(String guess) {
 	    inputtedGuess.setText(guess);
+	    repaint();
+	    board.setControlPanel(this);
 	}
 	
 	public void setGuessResult(String result) {
 		guessResult.setText(result);
+		repaint();
+	    board.setControlPanel(this);
 	}
 	
 	public void setTurn(Player player, int roll) {

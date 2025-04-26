@@ -75,6 +75,10 @@ public abstract class Player {
 	public void updatePosition(BoardCell cell) {
 		this.row = cell.getRow();
 		this.col = cell.getCol();
+		if(cell.isRoom()) {
+			Board board = Board.getInstance();
+			board.handleSuggestion(this, createSuggestion(board));
+		}
 		turnFinished = true;
 	}
 	

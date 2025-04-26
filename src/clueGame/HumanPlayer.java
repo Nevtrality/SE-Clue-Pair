@@ -12,7 +12,8 @@ public class HumanPlayer extends Player{
 	@Override
 	public Solution createSuggestion(Board board) {
 		// TODO Auto-generated method stub
-		return null;
+		PromptDialog dialogBox = new PromptDialog(board.getCell(row, col).getRoom());
+		return dialogBox.getDialogSolution();
 	}
 
 	@Override

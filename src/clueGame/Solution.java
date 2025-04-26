@@ -22,4 +22,12 @@ public class Solution {
     public Card getWeapon(){
         return weapon;
     }
+    
+    public String toString() {
+    	if(room == null) {
+    		return "No Suggestion";
+    	} else {
+    		return room.getCardName() + ", " + person.getCardName() + ", " + weapon.getCardName();
+    	}
+    }
 }

@@ -43,6 +43,10 @@ public class Board extends JPanel implements MouseListener{
 	// Max range for calcTargets range
 	private static int MAX_ROW_RANGE;
 	private static int MAX_COL_RANGE;
+	
+	// Suggestion holder
+	Solution currentSuggestion = new Solution(null,null,null);
+	GameControlPanel controlPanel;
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -294,6 +298,9 @@ public class Board extends JPanel implements MouseListener{
 
 	public Card handleSuggestion(Player suggester, Solution suggestion) {
 		Card proof;
+		currentSuggestion = suggestion;
+		// update control panel
+		controlPanel.setGuess(suggestion.toString());
 		// calls players disprove solution to see if they have card to disprove
 		for(Player player:players) {
 			// skip over player that suggested the solution
@@ -302,10 +309,18 @@ public class Board extends JPanel implements MouseListener{
 				proof = player.disproveSuggestion(suggestion);
 				// if it returned a card, return that card and exit function
 				if(proof != null) {
+					// update control panel
+					if(suggester.getType().equals("Human")) {
+						controlPanel.setGuessResult(proof.getCardName());
+					} else {
+						controlPanel.setGuessResult("Disproven");
+					}
 					return proof;
 				}
 			}
 		}
+		// update control panel
+		controlPanel.setGuessResult("Couldn't be disproven");
 		// No players could disprove, so return null
 		return null;
 	}
@@ -507,6 +522,19 @@ public class Board extends JPanel implements MouseListener{
 	public Set<BoardCell> getTargets(){
 		// return set/list created by calcTargets
 		return targetList;
+	}
+	
+	public Card getCard(String name) {
+		for(Card card : deck) {
+			if (card.getCardName().equals(name)) {
+				return card;
+			}
+		}
+		return null;
+	}
+	
+	public void setControlPanel(GameControlPanel controlPanel) {
+		this.controlPanel = controlPanel;
 	}
 
 }
