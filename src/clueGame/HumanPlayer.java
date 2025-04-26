@@ -21,4 +21,8 @@ public class HumanPlayer extends Player{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void setAccusation(Solution accusation) {
+		// do nothing
+	}
 }

@@ -328,6 +328,10 @@ public class Board extends JPanel implements MouseListener{
 		}
 		// update control panel
 		controlPanel.setGuessResult("Couldn't be disproven");
+		// update computer player's accusation
+		if(suggester.getType().equals("Computer")) {
+			suggester.setAccusation(suggestion);
+		}
 		// No players could disprove, so return null
 		return null;
 	}
@@ -346,6 +350,17 @@ public class Board extends JPanel implements MouseListener{
 			currentPlayerIndex = (currentPlayerIndex+1)%6; // update index and allow looping to start of list
 			currentPlayer = players.get(currentPlayerIndex);
 			currentPlayer.setTurnStatus(false); // set finished turn to false
+			
+			// force computer player to accuse at start of their turn
+			if(currentPlayer.getType().equals("Computer")) {
+				if(currentPlayer.createAccusation()!=null) {
+					Solution accusation = currentPlayer.createAccusation();
+					// check to see if solution equals accusation
+					if(accusation.equals(solution)) {
+						// END THE GAME
+					}
+				}
+			}
 			
 			// roll dice
 			Random rand = new Random();

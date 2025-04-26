@@ -149,7 +149,11 @@ public abstract class Player {
 	public abstract String getType();
 
 	public abstract Solution createSuggestion(Board board);
+	
+	public abstract Solution createAccusation();
 
 	public abstract BoardCell selectTarget(Board board, int i);
+	
+	public abstract void setAccusation(Solution accusation);
 
 }

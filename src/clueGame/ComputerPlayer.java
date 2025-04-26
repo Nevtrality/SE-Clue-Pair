@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player{
+	Solution storedAccusation = null;
 	public ComputerPlayer(String name, String color, int row, int column) {
 		super(name, color, row, column);
 	}
@@ -46,6 +47,14 @@ public class ComputerPlayer extends Player{
 				}
 			}
 		return new Solution(currRoom, suggestionList[1], suggestionList[2]);
+	}
+	
+	public void setAccusation(Solution accusation) {
+		storedAccusation = accusation;
+	}
+	
+	public Solution createAccusation() {
+		return storedAccusation;
 	}
 	
 	public BoardCell selectTarget(Board board, int rollNum) {
