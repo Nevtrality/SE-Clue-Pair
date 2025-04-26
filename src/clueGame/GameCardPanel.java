@@ -18,10 +18,12 @@ public class GameCardPanel extends JPanel{
 	JPanel playerPanel;
 	JPanel roomPanel;
 	JPanel weaponPanel;
+	Board board;
 	
 	List<Player> playerList;
 	
 	public GameCardPanel() {
+		board = Board.getInstance();
 		// set layout dimensions
 		setLayout(new GridLayout(3,0));
 		this.setSize(200, 750);
@@ -63,6 +65,7 @@ public class GameCardPanel extends JPanel{
 					weaponPanel.add(updateSeenPanel(new ArrayList<Card>()));
 				
 				add(weaponPanel);
+			board.setCardPanel(this);
 	}
 	
 	private void createJLabel(JPanel currentPanel, String labelText) {
@@ -138,6 +141,7 @@ public class GameCardPanel extends JPanel{
 			weaponPanel.add(updateSeenPanel(seenWeapon));
 		
 		weaponPanel.revalidate();
+		board.setCardPanel(this);
 	}
 	
 	JPanel updateHandPanel(List<Card> hand) {

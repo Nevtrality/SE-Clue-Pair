@@ -47,6 +47,7 @@ public class Board extends JPanel implements MouseListener{
 	// Suggestion holder
 	Solution currentSuggestion = new Solution(null,null,null);
 	GameControlPanel controlPanel;
+	GameCardPanel cardPanel;
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -312,6 +313,8 @@ public class Board extends JPanel implements MouseListener{
 					// update control panel
 					if(suggester.getType().equals("Human")) {
 						controlPanel.setGuessResult(proof.getCardName());
+						suggester.updateSeen(proof);
+						cardPanel.updatePanels(suggester);
 					} else {
 						controlPanel.setGuessResult("Disproven");
 					}
@@ -535,6 +538,10 @@ public class Board extends JPanel implements MouseListener{
 	
 	public void setControlPanel(GameControlPanel controlPanel) {
 		this.controlPanel = controlPanel;
+	}
+	
+	public void setCardPanel(GameCardPanel cardPanel) {
+		this.cardPanel= cardPanel;
 	}
 
 }
