@@ -81,6 +81,10 @@ public abstract class Player {
 		}
 		turnFinished = true;
 	}
+	public void forceMove(BoardCell cell) {
+		this.row = cell.getRow();
+		this.col = cell.getCol();
+	}
 	
 	public Card disproveSuggestion(Solution suggestion) {
 		List<Card> matchingCards = new ArrayList<Card>();
@@ -127,6 +131,10 @@ public abstract class Player {
 	}
 	public Set<Card> getSeen(){
 		return seenCards;
+	}
+	public BoardCell getCell() {
+		Board board = Board.getInstance();
+		return board.getCell(row,col);
 	}
 	
 	public void draw(Graphics graphics, int cellWidth, int cellHeight) {

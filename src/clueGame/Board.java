@@ -45,7 +45,6 @@ public class Board extends JPanel implements MouseListener{
 	private static int MAX_COL_RANGE;
 	
 	// Suggestion holder
-	Solution currentSuggestion = new Solution(null,null,null);
 	GameControlPanel controlPanel;
 	GameCardPanel cardPanel;
 
@@ -299,7 +298,12 @@ public class Board extends JPanel implements MouseListener{
 
 	public Card handleSuggestion(Player suggester, Solution suggestion) {
 		Card proof;
-		currentSuggestion = suggestion;
+		// move suggested player to room
+		for(Player suggested : players) {
+			if(suggested.getName().equals(suggestion.getPerson().getCardName())) {
+				suggested.forceMove(suggester.getCell());
+			}
+		}
 		// update control panel
 		controlPanel.setGuess(suggestion.toString());
 		// calls players disprove solution to see if they have card to disprove
