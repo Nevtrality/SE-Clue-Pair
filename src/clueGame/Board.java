@@ -330,7 +330,6 @@ public class Board extends JPanel implements MouseListener{
 		// if proofList is not empty, return random card in list
 		if(proofList.size()>0) {
 			Random rand = new Random();
-			System.out.println("ran");
 			Card finalProof = proofList.get(rand.nextInt(0,proofList.size()));
 			suggester.updateSeen(finalProof);
 			// update control panel
@@ -444,7 +443,7 @@ public class Board extends JPanel implements MouseListener{
 		// go through cells in adjacency list
 		for (BoardCell cell : startCell.getAdjList()){
 			// if visited or occupied, skip over
-			if (visited.contains(cell) || (cell.getOccupied()&& !cell.isRoom())){
+			if (visited.contains(cell) || (cell.getOccupied() && !cell.isRoom())){
 			} else {
 				// if the path ends here or cell is a room, end
 				if(pathlength==1 || cell.isRoom()){
