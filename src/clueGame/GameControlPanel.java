@@ -177,7 +177,7 @@ public class GameControlPanel extends JPanel {
 	
 	public void handleAccusation(Board board) {
 		Player player = board.getCurrentPlayer();
-		if(player.getType() == "Human" && player.getCell().isRoom()) {
+		if(player.getType() == "Human") {
 			if(!player.turnFinished) {
 				// do the thing
 				Solution accusation = player.createAccusation(board);
