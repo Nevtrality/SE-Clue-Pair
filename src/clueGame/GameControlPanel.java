@@ -127,10 +127,19 @@ public class GameControlPanel extends JPanel {
 	    board.setControlPanel(this);
 	}
 	
+	public void setGuessColor(Color color) {
+		inputtedGuess.setBackground(color);
+	}
+	
 	public void setGuessResult(String result) {
 		guessResult.setText(result);
 		repaint();
+		
 	    board.setControlPanel(this);
+	}
+	
+	public void setGuessResultColor(Color color) {
+		guessResult.setBackground(color);
 	}
 	
 	public void setTurn(Player player, int roll) {

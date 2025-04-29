@@ -76,7 +76,7 @@ public class PromptDialog extends JDialog{
 			submit.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent click) {
-					handleButton("","");
+					handleButton("",type);
 				}
 
 			});

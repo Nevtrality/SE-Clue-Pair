@@ -304,21 +304,22 @@ public class Board extends JPanel implements MouseListener{
 		}
 	}
 
-	public Card handleSuggestion(Player suggester, Solution suggestion) {
+	public Card handleSuggestion(Player suggestor, Solution suggestion) {
 		Card proof;
 		// move suggested player to room
 		for(Player suggested : players) {
 			if(suggested.getName().equals(suggestion.getPerson().getCardName())) {
-				suggested.forceMove(suggester.getCell());
+				suggested.forceMove(suggestor.getCell());
 			}
 		}
 		// update control panel
 		controlPanel.setGuess(suggestion.toString());
+//		controlPanel.setGuessColor(suggestor.getColor());
 		// calls players disprove solution to see if they have card to disprove
 		List<Card> proofList = new ArrayList<Card>();
 		for(Player player:players) {
 			// skip over player that suggested the solution
-			if(player != suggester) {
+			if(player != suggestor) {
 				// temp variable to hold result of disproveSuggestion
 				proof = player.disproveSuggestion(suggestion);
 				// if it returned a card, return that card and exit function
@@ -331,21 +332,29 @@ public class Board extends JPanel implements MouseListener{
 		if(proofList.size()>0) {
 			Random rand = new Random();
 			Card finalProof = proofList.get(rand.nextInt(0,proofList.size()));
-			suggester.updateSeen(finalProof);
+			suggestor.updateSeen(finalProof);
 			// update control panel
-			if(suggester.getType().equals("Human")) {
+			if(suggestor.getType().equals("Human")) {
 				controlPanel.setGuessResult(finalProof.getCardName());
-				cardPanel.updatePanels(suggester);
+				cardPanel.updatePanels(suggestor);
 			} else {
 				controlPanel.setGuessResult("Disproven");
 			}
+			
+			//Find the player that disproved the card
+//			for (Player player : players) {
+//				if (player.getHand().contains(finalProof)) {
+//					controlPanel.setGuessResultColor(player.getColor());
+//					break;
+//				}
+//			}
 			return finalProof;
 		}
 		// update control panel
 		controlPanel.setGuessResult("Couldn't be disproven");
 		// update computer player's accusation
-		if(suggester.getType().equals("Computer")) {
-			suggester.setAccusation(suggestion);
+		if(suggestor.getType().equals("Computer")) {
+			suggestor.setAccusation(suggestion);
 		}
 		// No players could disprove, so return null
 		return null;
