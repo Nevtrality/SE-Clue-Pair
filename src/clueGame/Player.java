@@ -73,9 +73,10 @@ public abstract class Player {
 	}
 	
 	public void updatePosition(BoardCell cell) {
+		System.out.println("update");
 		this.row = cell.getRow();
 		this.col = cell.getCol();
-		if(cell.isRoom()) {
+		if(cell.isRoom()&&turnFinished==false) {
 			Board board = Board.getInstance();
 			board.handleSuggestion(this, createSuggestion(board));
 		}
@@ -90,9 +91,9 @@ public abstract class Player {
 		List<Card> matchingCards = new ArrayList<Card>();
 		// check if player holds a suggested card
 		for (Card card : hand) {
-	        if (card.equals(suggestion.getPerson()) || 
-	            card.equals(suggestion.getWeapon()) || 
-	            card.equals(suggestion.getRoom())) {
+	        if (card.equals(suggestion.getRoom()) || 
+	            card.equals(suggestion.getPerson()) || 
+	            card.equals(suggestion.getWeapon())) {
 	            matchingCards.add(card);
 	        }
 	    }

@@ -315,6 +315,7 @@ public class Board extends JPanel implements MouseListener{
 		// update control panel
 		controlPanel.setGuess(suggestion.toString());
 		// calls players disprove solution to see if they have card to disprove
+		List<Card> proofList = new ArrayList<Card>();
 		for(Player player:players) {
 			// skip over player that suggested the solution
 			if(player != suggester) {
@@ -322,17 +323,24 @@ public class Board extends JPanel implements MouseListener{
 				proof = player.disproveSuggestion(suggestion);
 				// if it returned a card, return that card and exit function
 				if(proof != null) {
-					// update control panel
-					if(suggester.getType().equals("Human")) {
-						controlPanel.setGuessResult(proof.getCardName());
-						suggester.updateSeen(proof);
-						cardPanel.updatePanels(suggester);
-					} else {
-						controlPanel.setGuessResult("Disproven");
-					}
-					return proof;
+					proofList.add(proof);
 				}
 			}
+		}
+		// if proofList is not empty, return random card in list
+		if(proofList.size()>0) {
+			Random rand = new Random();
+			System.out.println("ran");
+			Card finalProof = proofList.get(rand.nextInt(0,proofList.size()));
+			suggester.updateSeen(finalProof);
+			// update control panel
+			if(suggester.getType().equals("Human")) {
+				controlPanel.setGuessResult(finalProof.getCardName());
+				cardPanel.updatePanels(suggester);
+			} else {
+				controlPanel.setGuessResult("Disproven");
+			}
+			return finalProof;
 		}
 		// update control panel
 		controlPanel.setGuessResult("Couldn't be disproven");
