@@ -18,6 +18,7 @@ public class PromptDialog extends JDialog{
 	JButton submit;
 	JButton cancel;
 	Solution solution;
+	JComboBox<String> rDropdown;
 	JComboBox<String> pDropdown;
 	JComboBox<String> wDropdown;
 	Card room;
@@ -38,8 +39,15 @@ public class PromptDialog extends JDialog{
 		panel.setLayout(new GridLayout(0,2));
 			JLabel label = new JLabel("Current room");
 			panel.add(label);
-			label = new JLabel(currentRoom.getName()); // current room's name
-			panel.add(label);
+			if(type.equals("Suggestion")) {
+				label = new JLabel(currentRoom.getName()); // current room's name
+				panel.add(label);
+			} else {
+				rDropdown = new JComboBox<String>();
+				setupDropdown(rDropdown,"Room");
+				panel.add(rDropdown);
+			}
+			
 		add(panel);
 		// second row of dialog box (person)
 		panel = new JPanel();
@@ -68,7 +76,7 @@ public class PromptDialog extends JDialog{
 			submit.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent click) {
-					handleButton("");
+					handleButton("","");
 				}
 
 			});
@@ -80,7 +88,7 @@ public class PromptDialog extends JDialog{
 			cancel.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent click) {
-					handleButton("close");
+					handleButton("close",type);
 				}
 				
 			});
@@ -106,16 +114,26 @@ public class PromptDialog extends JDialog{
 					dropdown.addItem(card.getCardName());
 				}
 			}
+		}else if(type.equals("Room")) {
+			for(Card card : board.getDeck()) {
+				if(card.getCardType()==CardType.ROOM) {
+					dropdown.addItem(card.getCardName());
+				}
+			}
 		}
 	}
 	
-	public void handleButton(String type) {
+	public void handleButton(String type, String type2) {
 		if(type.equals("close")) { // close when cancelling
 			solution = new Solution(null,null,null);
 			dispose();
 		} else {
 			// update solution list to hold selected items in dropdown menu
-			solution = new Solution(room, board.getCard(pDropdown.getSelectedItem().toString()), board.getCard(wDropdown.getSelectedItem().toString()));
+			if(type2.equals("Suggestion")) {
+				solution = new Solution(room, board.getCard(pDropdown.getSelectedItem().toString()), board.getCard(wDropdown.getSelectedItem().toString()));
+			}else {
+				solution = new Solution(board.getCard(rDropdown.getSelectedItem().toString()), board.getCard(pDropdown.getSelectedItem().toString()), board.getCard(wDropdown.getSelectedItem().toString()));
+			}
 			dispose(); // close dialog box
 		}
 	}
