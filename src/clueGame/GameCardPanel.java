@@ -164,12 +164,14 @@ public class GameCardPanel extends JPanel{
 					Color color = playerWithCard.getColor();
 					handCards.setBackground(color);
 					handPanel.add(handCards);
+					handCards.setEditable(false);
 				}
 			} else {
 				//if no new seen cards, set text field to say none
 				handCards = new JTextField();
 				handCards.setText("None");
 				handPanel.add(handCards);
+				handCards.setEditable(false);
 			}
 		return handPanel;
 	}
@@ -190,6 +192,7 @@ public class GameCardPanel extends JPanel{
 				seenCards = new JTextField();
 				seenCards.setText("None");
 				seenPanel.add(seenCards);
+				seenCards.setEditable(false);
 			} else {
 				// loop through list of cards and add to panel
 				for (Card card: seen) {
@@ -198,6 +201,7 @@ public class GameCardPanel extends JPanel{
 					Color color = playerWithCard.getColor();
 					seenCards.setBackground(color);
 					seenPanel.add(seenCards);
+					seenCards.setEditable(false);
 				}
 			}
 		return seenPanel;

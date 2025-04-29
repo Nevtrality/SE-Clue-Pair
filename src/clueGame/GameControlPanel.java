@@ -41,6 +41,7 @@ public class GameControlPanel extends JPanel {
 				innerPanel.setLayout(new GridLayout(3,0));
 					createJLabel(innerPanel, "Whose turn?");
 					turnIndicator = new JTextField();
+					turnIndicator.setEditable(false);
 					innerPanel.add(turnIndicator); // add text field
 			panel.add(innerPanel);
 				// contains roll indicator
@@ -51,6 +52,7 @@ public class GameControlPanel extends JPanel {
 					innerInnerPanel.add(new JPanel()); // add empty space to make it prettier
 					createJLabel(innerInnerPanel, "Roll:");
 					rollIndicator = new JTextField();
+					rollIndicator.setEditable(false);
 					innerInnerPanel.add(rollIndicator); // add text field
 					innerPanel.add(innerInnerPanel);
 			panel.add(innerPanel);
@@ -96,6 +98,7 @@ public class GameControlPanel extends JPanel {
 				innerPanel = new JPanel();
 				innerPanel.setLayout(new GridLayout(1,0));
 					inputtedGuess = new JTextField();
+					inputtedGuess.setEditable(false);
 					innerPanel.add(inputtedGuess); // add text field
 					innerPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 			panel.add(innerPanel);
@@ -103,6 +106,7 @@ public class GameControlPanel extends JPanel {
 				innerPanel.setLayout(new GridLayout(1,0));
 					guessResult = new JTextField();
 					innerPanel.add(guessResult); // add text field
+					guessResult.setEditable(false);
 					innerPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
 			panel.add(innerPanel);
 		add(panel);
