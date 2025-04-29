@@ -1,10 +1,15 @@
 package clueGame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
+
 import java.util.HashSet;
 
 public abstract class Player {
@@ -153,6 +158,12 @@ public abstract class Player {
 		graphics.setColor(color);
 		graphics.fillOval(x, y, cellWidth, cellHeight);
 		
+		try {
+			if(this.name.equals("Gregory House")) {
+				BufferedImage house = ImageIO.read(new File("data/housejumpscare.jpeg"));
+				graphics.drawImage(house, cellWidth*col, cellHeight*row, cellWidth, cellWidth, null);
+			}
+		}catch(Exception e) {}
 	}
 	
 	
