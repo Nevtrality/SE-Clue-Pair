@@ -22,10 +22,14 @@ public class PromptDialog extends JDialog{
 	JComboBox<String> wDropdown;
 	Card room;
 	
-	public PromptDialog(Room currentRoom) {
+	public PromptDialog(Room currentRoom, String type) {
 		board = Board.getInstance();
 		setModal(true);
-		setTitle("Make a Suggestion");
+		if(type.equals("Suggestion")) {
+			setTitle("Make a Suggestion");
+		} else {
+			setTitle("Make an Accusation");
+		}
 		room = board.getCard(currentRoom.getName());
 		
 		setLayout(new GridLayout(4,0));
@@ -123,6 +127,6 @@ public class PromptDialog extends JDialog{
 	public static void main(String args[]) {
 		Room room = new Room();
 		room.setName("bathroom");
-		PromptDialog dialog = new PromptDialog(room);
+		PromptDialog dialog = new PromptDialog(room, "give up");
 	}
 }

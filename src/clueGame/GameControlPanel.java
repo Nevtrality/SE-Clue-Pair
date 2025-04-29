@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
@@ -57,6 +58,14 @@ public class GameControlPanel extends JPanel {
 				innerPanel = new JPanel();
 				innerPanel.setLayout(new GridLayout(1,0));
 					makeAccusation = new JButton("Make Accusation");
+					
+					// makeAccusation button listener
+					makeAccusation.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent click) {
+							handleAccusation(board);
+						}
+					});
 					
 					// makeAccusation button listener
 					innerPanel.add(makeAccusation);
@@ -163,6 +172,17 @@ public class GameControlPanel extends JPanel {
 			board.repaint();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}
+	}
+	
+	public void handleAccusation(Board board) {
+		Player player = board.getCurrentPlayer();
+		if(player.getType() == "Human" && player.getCell().isRoom()) {
+			if(!player.turnFinished) {
+				// do the thing
+				Solution accusation = player.createAccusation(board);
+				board.checkAccusation(accusation);
+			}
 		}
 	}
 	

@@ -12,7 +12,7 @@ public class HumanPlayer extends Player{
 	@Override
 	public Solution createSuggestion(Board board) {
 		// TODO Auto-generated method stub
-		PromptDialog dialogBox = new PromptDialog(board.getCell(row, col).getRoom());
+		PromptDialog dialogBox = new PromptDialog(board.getCell(row, col).getRoom(), "Suggestion");
 		return dialogBox.getDialogSolution();
 	}
 
@@ -24,5 +24,10 @@ public class HumanPlayer extends Player{
 	
 	public void setAccusation(Solution accusation) {
 		// do nothing
+	}
+	
+	public Solution createAccusation(Board board) {
+		PromptDialog accusationBox = new PromptDialog(board.getCell(row,col).getRoom(),"Accusation");
+		return accusationBox.getDialogSolution();
 	}
 }

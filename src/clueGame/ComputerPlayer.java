@@ -53,7 +53,7 @@ public class ComputerPlayer extends Player{
 		storedAccusation = accusation;
 	}
 	
-	public Solution createAccusation() {
+	public Solution createAccusation(Board board) {
 		return storedAccusation;
 	}
 	

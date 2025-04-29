@@ -28,6 +28,7 @@ public class ClueGame extends JFrame{
 		cardPanel = drawCardPanel();
 		cardPanel.setPreferredSize(new Dimension(120,0));
 		add(cardPanel, BorderLayout.EAST);
+		board.setGame(this);
 	}
 	
 	private JPanel drawBoard() {

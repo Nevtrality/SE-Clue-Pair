@@ -14,7 +14,7 @@ public abstract class Player {
 	int col;
 	List<Card> hand = new ArrayList<Card>();
 	Set<Card> seenCards = new HashSet<Card>();
-	boolean turnFinished = false;
+	public boolean turnFinished = false;
 	
 	public Player(String name, String color, int row, int col){
 		this.name = name;
@@ -140,6 +140,16 @@ public abstract class Player {
 	public void draw(Graphics graphics, int cellWidth, int cellHeight) {
 		int x = cellWidth * col;
 		int y = cellHeight * row;
+
+		for(Player player: Board.getInstance().getPlayers()){
+			if(player.name == this.name) {
+				break;
+			}
+			else if(player.row == this.row && player.col == this.col) {
+				y += cellHeight/5;
+			}
+		}
+
 		graphics.setColor(color);
 		graphics.fillOval(x, y, cellWidth, cellHeight);
 		
@@ -150,7 +160,7 @@ public abstract class Player {
 
 	public abstract Solution createSuggestion(Board board);
 	
-	public abstract Solution createAccusation();
+	public abstract Solution createAccusation(Board board);
 
 	public abstract BoardCell selectTarget(Board board, int i);
 	

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
@@ -47,6 +48,7 @@ public class Board extends JPanel implements MouseListener{
 	// Suggestion holder
 	GameControlPanel controlPanel;
 	GameCardPanel cardPanel;
+	ClueGame game;
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -289,9 +291,15 @@ public class Board extends JPanel implements MouseListener{
 		// if room = solution.room, person = solution.person, and weapon = solution.weapon
 		if (solution.getRoom().equals(accusation.getRoom()) && solution.getPerson().equals(accusation.getPerson()) && solution.getWeapon().equals(accusation.getWeapon())) {
 			// return true
+			// Show popup of what player won and what the solution was
+			JOptionPane.showMessageDialog(null, "See, it's never Lupus. Adequate work, solving the case. Maybe you should join the team.\n"+ "\n" + currentPlayer.getName() + " won the game"+ "\nThe solution was "+ solution.getPerson().getCardName() + " in " + solution.getRoom().getCardName() + " using " + solution.getWeapon().getCardName(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
+			// END THE GAME (close ClueGame)
+			game.dispose();
 			return true;
 		} else {
 			// else publicly execute player
+			JOptionPane.showMessageDialog(null, "Your accusation was incorrect\n"+"The correct solution was "+ solution.getPerson().getCardName() + " in " + solution.getRoom().getCardName() + " using " + solution.getWeapon().getCardName(), "You Lose", JOptionPane.INFORMATION_MESSAGE);
+			game.dispose();
 			return false;
 		}
 	}
@@ -351,13 +359,13 @@ public class Board extends JPanel implements MouseListener{
 			currentPlayer = players.get(currentPlayerIndex);
 			currentPlayer.setTurnStatus(false); // set finished turn to false
 			
-			// force computer player to accuse at start of their turn
+			// force computer player to accuse at start of their turn if possible
 			if(currentPlayer.getType().equals("Computer")) {
-				if(currentPlayer.createAccusation()!=null) {
-					Solution accusation = currentPlayer.createAccusation();
+				if(currentPlayer.createAccusation(theInstance)!=null) {
+					Solution accusation = currentPlayer.createAccusation(theInstance);
 					// check to see if solution equals accusation
-					if(accusation.equals(solution)) {
-						// END THE GAME
+					if(checkAccusation(accusation)) {
+						
 					}
 				}
 			}
@@ -561,6 +569,10 @@ public class Board extends JPanel implements MouseListener{
 	
 	public void setCardPanel(GameCardPanel cardPanel) {
 		this.cardPanel= cardPanel;
+	}
+	
+	public void setGame(ClueGame game) {
+		this.game = game;
 	}
 
 }
