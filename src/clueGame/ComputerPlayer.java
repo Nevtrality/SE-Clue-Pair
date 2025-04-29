@@ -67,14 +67,19 @@ public class ComputerPlayer extends Player{
 		int targetNum = rand.nextInt(0,targets.size());
 		Card roomCard = null;
 		//check each cell in targets and if it is a room center and hasn't been seen, return the cell
+		String roomName = null;
 		for(BoardCell cell : targets) {
-			String roomName = cell.getRoom().getName();
+			if(cell.getSecretPassage()!='\0') {
+				roomName = board.roomMap.get(cell.getSecretPassage()).getName();
+			} else {
+				roomName = cell.getRoom().getName();
+			}
 			for(Card cards : board.getDeck()) {
 				if(cards.getCardName().equals(roomName)) {
 					roomCard = cards; 
 				}
 			}
-			if(cell.isRoomCenter() && !seenCards.contains(roomCard)) {
+			if(cell.isRoomCenter() && !seenCards.contains(roomCard) && !hand.contains(roomCard)) {
 				return cell;
 			}
 		}
