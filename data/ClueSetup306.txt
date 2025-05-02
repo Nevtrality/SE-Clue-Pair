@@ -11,3 +11,17 @@ Room, Hall, H
 // other spaces on board
 Space, Unused, X
 Space, Walkway, W
+//People
+Person, Gregory House, Red, Human, 9, 0
+Person, Dr. Wilson, White, Computer, 18, 0
+Person, Allison Cameron, Cyan, Computer, 28, 9
+Person, Lisa Cuddy, Orange, Computer, 28, 18
+Person, Thirteen, Green, Computer, 18, 27
+Person, Eric Foreman, Pink, Computer, 9, 27
+//Weapons
+Weapon, House's Cane
+Weapon, Stethoscope
+Weapon, Mystery Vial
+Weapon, Scalpel
+Weapon, Cancer
+Weapon, Microscope

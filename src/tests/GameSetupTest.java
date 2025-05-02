@@ -43,8 +43,8 @@ public class GameSetupTest {
 			assertEquals(players.get(4).getName(),"Thirteen");
 			assertEquals(players.get(5).getName(),"Eric Foreman");
 
-			assertEquals(players.get(1).getColor(), Color.getColor("Blue"));
-			assertEquals(players.get(4).getColor(), Color.getColor("Green"));
+			assertEquals(players.get(1).getColor(), Color.WHITE);
+			assertEquals(players.get(4).getColor(), Color.GREEN);
 		}
 		
 		@Test

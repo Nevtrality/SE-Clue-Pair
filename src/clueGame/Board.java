@@ -294,12 +294,16 @@ public class Board extends JPanel implements MouseListener{
 			// Show popup of what player won and what the solution was
 			JOptionPane.showMessageDialog(null, "See, it's never Lupus. Adequate work, solving the case. Maybe you should join the team.\n"+ "\n" + currentPlayer.getName() + " won the game"+ "\nThe solution was "+ solution.getPerson().getCardName() + " in " + solution.getRoom().getCardName() + " using " + solution.getWeapon().getCardName(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
 			// END THE GAME (close ClueGame)
-			game.dispose();
+			try {
+				game.dispose();
+			} catch(Exception e) {}
 			return true;
 		} else {
 			// else publicly execute player
 			JOptionPane.showMessageDialog(null, "Your accusation was incorrect\n"+"The correct solution was "+ solution.getPerson().getCardName() + " in " + solution.getRoom().getCardName() + " using " + solution.getWeapon().getCardName(), "You Lose", JOptionPane.INFORMATION_MESSAGE);
-			game.dispose();
+			try {
+				game.dispose();
+			} catch(Exception e) {}
 			return false;
 		}
 	}
@@ -313,7 +317,9 @@ public class Board extends JPanel implements MouseListener{
 			}
 		}
 		// update control panel
-		controlPanel.setGuess(suggestion.toString());
+		try {
+			controlPanel.setGuess(suggestion.toString());
+		} catch(Exception e) {}
 //		controlPanel.setGuessColor(suggestor.getColor());
 		// calls players disprove solution to see if they have card to disprove
 		List<Card> proofList = new ArrayList<Card>();
@@ -335,23 +341,23 @@ public class Board extends JPanel implements MouseListener{
 			suggestor.updateSeen(finalProof);
 			// update control panel
 			if(suggestor.getType().equals("Human")) {
-				controlPanel.setGuessResult(finalProof.getCardName());
-				cardPanel.updatePanels(suggestor);
+				try {
+					controlPanel.setGuessResult(finalProof.getCardName());
+					cardPanel.updatePanels(suggestor);
+				} catch(Exception e) {}
 			} else {
-				controlPanel.setGuessResult("Disproven");
+				try {
+					controlPanel.setGuessResult("Disproven");
+				} catch(Exception e) {}
 			}
 			
 			//Find the player that disproved the card
-//			for (Player player : players) {
-//				if (player.getHand().contains(finalProof)) {
-//					controlPanel.setGuessResultColor(player.getColor());
-//					break;
-//				}
-//			}
 			return finalProof;
 		}
 		// update control panel
-		controlPanel.setGuessResult("Couldn't be disproven");
+		try {
+			controlPanel.setGuessResult("Couldn't be disproven");
+		}catch(Exception e) {}
 		// update computer player's accusation
 		if(suggestor.getType().equals("Computer")) {
 			suggestor.setAccusation(suggestion);
