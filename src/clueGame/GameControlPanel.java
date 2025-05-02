@@ -122,7 +122,7 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	public void setGuess(String guess) {
-	    inputtedGuess.setText(guess);
+	    inputtedGuess.setText(board.getCurrentPlayer().getName() + " guessed " + guess);
 	    repaint();
 	    board.setControlPanel(this);
 	}
@@ -132,7 +132,18 @@ public class GameControlPanel extends JPanel {
 	}
 	
 	public void setGuessResult(String result) {
+		board = Board.getInstance();
+		Color playerColor = null;
+		for(Player player : board.getPlayers()) {
+			for(Card card : player.getHand()) {
+				if(card.getCardName().equals(result)) {
+					playerColor = player.getColor();
+					break;
+				}
+			}
+		}
 		guessResult.setText(result);
+		guessResult.setBackground(playerColor);
 		repaint();
 		
 	    board.setControlPanel(this);

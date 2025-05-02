@@ -1,0 +1,3 @@
+1. We added the House MD theme song in the background
+2. We added a picture of Dr. House to his player figure on the board (who the user plays as)
+3. We have our Clue project as a playable .jar file

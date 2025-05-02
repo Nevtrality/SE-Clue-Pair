@@ -82,13 +82,17 @@ public abstract class Player {
 		board.getCell(row, col).setOccupied(false);
 		this.row = cell.getRow();
 		this.col = cell.getCol();
-		cell.setOccupied(true);
+		if(!cell.isRoom()) {
+			cell.setOccupied(true);
+		}
 		if(cell.isRoom()&&turnFinished==false) {
 			board.handleSuggestion(this, createSuggestion(board));
 		}
 		turnFinished = true;
 	}
 	public void forceMove(BoardCell cell) {
+		Board board = Board.getInstance();
+		board.getCell(row,col).setOccupied(false);
 		this.row = cell.getRow();
 		this.col = cell.getCol();
 	}

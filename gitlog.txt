@@ -1,124 +1,94 @@
-BEFORE:
-	
-	public void deal() {
-		if(deck.size() < 10) {
-			return;
-		}
-		Random rand = new Random();
-		// deal deck to solution
-		List<Card> tempdeck = new ArrayList<Card>();
-		for(Card card : deck) {
-			tempdeck.add(card);
-		}
-		int roomLoc = rand.nextInt(0,9);
-		int personLoc = rand.nextInt(9,15);
-		int weaponLoc = rand.nextInt(15,21);
-		solution = new Solution(deck.get(roomLoc), deck.get(personLoc), deck.get(weaponLoc));
-		tempdeck.remove(roomLoc);
-		tempdeck.remove(personLoc-1);
-		tempdeck.remove(weaponLoc-2);
-		// deal deck to players
-		for(int i = DECKSIZE - 3; i > 0; i--) {
-			int num = rand.nextInt(0,i);
-			Card card = tempdeck.get(num);
-			while(card==null) {
-				num = rand.nextInt(0,21);
-				card = tempdeck.get(num);
-			}
-			players.get(i%6).updateHand(card);
-			tempdeck.remove(num);
-		}
-	}
+commit 9271c3ca3756c13baa60092b84781663f0c1ee9f
+Author: cMillham <chloemillham@gmail.com>
+Date:   Thu May 1 21:43:10 2025 -0600
 
-}
+    fixed failing tests
 
+commit 6c75ee44e887f39dd2bc78ae636a7aab270e5741
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 29 13:47:14 2025 -0600
 
-AFTER:
+    bleh
 
-////////////////////////////////////// CARD DECK HANDLING //////////////////////////////////////////////////////////
+commit 473bb02c12447f0f9c4537f45147bc5970629c7b
+Merge: 873869a b5ad65e
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 29 13:15:52 2025 -0600
 
-	public void deal() {
-		if(deck.size() < 10) {
-			return;
-		}
-		Random rand = new Random();
-		// deal deck to solution
-		List<Card> tempdeck = new ArrayList<Card>();
-		for(Card card : deck) {
-			tempdeck.add(card);
-		}
-		int roomLoc = rand.nextInt(0,9);
-		int personLoc = rand.nextInt(9,15);
-		int weaponLoc = rand.nextInt(15,21);
-		solution = new Solution(deck.get(roomLoc), deck.get(personLoc), deck.get(weaponLoc));
-		tempdeck.remove(roomLoc);
-		tempdeck.remove(personLoc-1);
-		tempdeck.remove(weaponLoc-2);
-		// deal deck to players
-		for(int i = DECKSIZE - 3; i > 0; i--) {
-			int num = rand.nextInt(0,i);
-			Card card = tempdeck.get(num);
-			while(card==null) {
-				num = rand.nextInt(0,21);
-				card = tempdeck.get(num);
-			}
-			players.get(i%6).updateHand(card);
-			tempdeck.remove(num);
-		}
-	}
-	
-//////////////////////////////////////ALL GETTER FUNCTIONS //////////////////////////////////////////////////////////
+    Text fields are uneditable
 
-	//General get functions
-	public int getNumRows() {
-		return MAX_ROW_RANGE;
-	}
-	
-	public int getNumColumns() {
-		return MAX_COL_RANGE;
-	}
-	
-	public List<Player> getPlayers() {
-		return players;
-	}
-	
-	public List<Card> getDeck(){
-		return deck;
-	}
-	
-	public Solution getSolution(){
-		return solution;
-	}
-	
-	public Room getRoom(char letter) {
-		return roomMap.get(letter);
-	}
-	
-	public Room getRoom(BoardCell cell) {
-		return cell.getRoom();
-	}
-	
-	public Player getCurrentPlayer() {
-		return currentPlayer;
-	}
-	
-	// Movement based get functions
-	public Set<BoardCell> getAdjList(int row, int col){
-		// return adjacency list for current position in grid
-		return grid[row][col].getAdjList();
-	}
+commit 873869ad902a7f1e9eb38f31d9fb388ebcdea8d4
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 29 13:13:48 2025 -0600
 
-	public BoardCell getCell(int row, int col){
-		// return cell at specified position
-		return grid[row][col];
-	}
+    Text fields are uneditable
 
-	public Set<BoardCell> getTargets(){
-		// return set/list created by calcTargets
-		return targetList;
-	}
+commit b5ad65e6b920df52b44fccb6e76f42ecfd50b9c2
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Apr 29 13:11:53 2025 -0600
 
-}
+    allowed accusations to be made outside of a room
+
+commit 3ca50b0eefd79a611992e4d4dedc72745b9c1d3c
+Merge: 41c61b8 4345199
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 29 13:01:31 2025 -0600
+
+    added house image to player icon
+
+commit 41c61b8184025fa918493fabd81a987883a160ad
+Author: cMillham <chloemillham@gmail.com>
+Date:   Tue Apr 29 12:59:29 2025 -0600
+
+    Added house image to the player icon
+
+commit 4345199b9cc6f7da6c2a0392f09d03d67c48db37
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Apr 29 10:39:02 2025 -0600
+
+    fixed players being able to land on same space as another player
+
+commit cf04211fd7fcf750661cdb5bf99776ceac813bbc
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Tue Apr 29 00:20:17 2025 -0600
+
+    fixed cpu pathfinding
+
+commit 6efe1279df398a488c18b8e91bd9b6ef09c7c74d
+Author: cMillham <chloemillham@gmail.com>
+Date:   Mon Apr 28 23:21:32 2025 -0600
+
+    added music and image for extra credit
+
+commit 6ba5be282192eca07dcab81bfbd8ea0e7d502518
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Mon Apr 28 22:25:47 2025 -0600
+
+    got accusations working
+
+commit a6e78cf1be6c0f4eb1dcf60aeea1434f3eb30d45
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sat Apr 26 16:27:36 2025 -0600
+
+    I forgot what I changed
+
+commit a761b4c7f41fd905ba8afcbbcd3e66bc625ea083
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sat Apr 26 15:58:04 2025 -0600
+
+    forcefully move players when they're included in suggestion
+
+commit 1060e4729ca53c996a865a3bd4fc147d6aa64ef0
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sat Apr 26 15:49:29 2025 -0600
+
+    allowed seen panel to be updated when guess made
+
+commit 63953a400a853fab2f4c62cd9e67fd046fe6d2d2
+Author: Nevtrality <james_towle@outlook.com>
+Date:   Sat Apr 26 15:40:46 2025 -0600
+
+    added suggestion creation for human and computer players
 
 commit 4164fab6407813fc81a7f38b356b004c38dae8bd
 Author: Nevtrality <james_towle@outlook.com>
